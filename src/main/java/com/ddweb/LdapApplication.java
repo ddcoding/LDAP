@@ -1,7 +1,7 @@
 package com.ddweb;
 
-import com.ddweb.ldap.LdapConnection;
-import com.ddweb.lua.LuaConnect;
+import com.ddweb.config.LuaConfig;
+import com.ddweb.service.LdapConnection;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,8 +12,8 @@ import org.springframework.context.ConfigurableApplicationContext;
         public static void main(String[] args) {
             ConfigurableApplicationContext ctx = SpringApplication.run(LdapApplication.class,args);
             LdapConnection ldapConnection = ctx.getBean(LdapConnection.class);
-            LuaConnect luaConnect = ctx.getBean(LuaConnect.class);
+            LuaConfig luaConfig = ctx.getBean(LuaConfig.class);
             ldapConnection.ConnectViaLdap();
-            luaConnect.ExamplePrint();
+            luaConfig.LuaMainInit();
         }
     }

@@ -1,29 +1,34 @@
-package com.ddweb.ldap;
+package com.ddweb.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.ldap.core.LdapOperations;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.LdapContextSource;
-import org.springframework.ldap.filter.AndFilter;
-import org.springframework.ldap.filter.EqualsFilter;
-import org.springframework.stereotype.Component;
 
-import java.util.List;
 
-@Component
+/**
+ *  Ldap configuration file
+ */
+@Configuration
 @PropertySource("classpath:application.properties")
-public class LdapConnection {
-
+public class LdapConfig {
+   /**
+    *   Variable is used for using properties file
+    */
     private final Environment env;
-
     @Autowired
-    public LdapConnection(Environment env) {
+    public LdapConfig(Environment env) {
         this.env = env;
     }
 
-    public void ConnectViaLdap()
-    {
+    /**
+     *  Setting LDAP context
+     *  @return - LdapTemplate is used for applying filters
+     */
+    public LdapOperations getTemplate(){
         String url = env.getProperty("LdapUrl");
         String base = env.getProperty("LdapBase");
         String userDn = env.getProperty("LdapUserDn");
@@ -34,18 +39,6 @@ public class LdapConnection {
         ctx.setUserDn(userDn);
         ctx.setPassword(password);
         ctx.afterPropertiesSet();
-        LdapTemplate lt = new LdapTemplate(ctx);
-
-
-//        Query Test Connect
-        AndFilter andFilter = new AndFilter();
-        andFilter.and(new EqualsFilter("objectclass","Person"));
-        andFilter.and(new EqualsFilter("cn","Jan"));
-//        andFilter.and(new EqualsFilter("objectclass","OrganizationalUnit"));
-        @SuppressWarnings("unchecked")
-        List<String> stringList = lt.search("",andFilter.encode(),new ContactAttrJSON());
-        System.out.println(stringList.toString());
-
+        return new LdapTemplate(ctx);
     }
-
 }
