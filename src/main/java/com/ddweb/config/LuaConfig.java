@@ -6,6 +6,7 @@ import org.luaj.vm2.lib.jse.JsePlatform;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -21,10 +22,18 @@ public class LuaConfig {
     /**
      *  Initialization of main.lua
      */
-    public void LuaMainInit()
+    public boolean LuaMainInit()
     {
+        File f = new File(LuaConfig.LUA_PATH);
+        if(f.exists() && !f.isDirectory()) {
             Globals globals = JsePlatform.standardGlobals();
             LuaValue chunk = globals.loadfile(LuaConfig.LUA_PATH);
             chunk.call();
+            return true;
+        }
+        else {
+            System.err.println("PATH TO LUA FILE IS WRONG!");
+            return false;
+        }
     }
 }
