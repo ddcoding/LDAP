@@ -11,9 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
         public static void main(String[] args) {
             ConfigurableApplicationContext ctx = SpringApplication.run(LdapApplication.class,args);
-            LdapConnection ldapConnection = ctx.getBean(LdapConnection.class);
             LuaConfig luaConfig = ctx.getBean(LuaConfig.class);
-            ldapConnection.ConnectViaLdap();
             luaConfig.LuaMainInit();
         }
     }

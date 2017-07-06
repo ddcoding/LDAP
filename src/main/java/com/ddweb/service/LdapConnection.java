@@ -1,6 +1,7 @@
 package com.ddweb.service;
 
 import com.ddweb.config.LdapConfig;
+import com.ddweb.model.LdapFilter;
 import com.ddweb.service.ContactAttrJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.filter.AndFilter;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
 /**
  *  Receiving data from LDAP data store
  */
@@ -28,12 +31,12 @@ public class LdapConnection {
      *  getting records from LDAP method
      *  @return list of records
      */
-    public List<String> ConnectViaLdap()
+    public List<String> ConnectViaLdap(List<LdapFilter> ldapFiltersList)
     {
-        //test filters
         AndFilter andFilter = new AndFilter();
-        andFilter.and(new EqualsFilter("objectclass","Person"));
-        andFilter.and(new EqualsFilter("cn","Jan"));
+        for(LdapFilter ldapFilter : ldapFiltersList ){
+            andFilter.and(new EqualsFilter(ldapFilter.getAttribute(),ldapFilter.getValue()));
+        }
         @SuppressWarnings("unchecked")
         List<String> stringList = ldapConfig.getTemplate().search("",andFilter.encode(),new ContactAttrJSON());
         System.out.println(stringList.toString());

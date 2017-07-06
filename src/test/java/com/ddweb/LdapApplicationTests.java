@@ -11,6 +11,7 @@ public class LdapApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }

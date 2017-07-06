@@ -5,6 +5,10 @@ import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.JsePlatform;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 /**
  *  Lua Configuration file
  */
@@ -19,8 +23,8 @@ public class LuaConfig {
      */
     public void LuaMainInit()
     {
-        Globals globals = JsePlatform.standardGlobals();
-        LuaValue chunk = globals.loadfile(LuaConfig.LUA_PATH);
-        chunk.call();
+            Globals globals = JsePlatform.standardGlobals();
+            LuaValue chunk = globals.loadfile(LuaConfig.LUA_PATH);
+            chunk.call();
     }
 }
