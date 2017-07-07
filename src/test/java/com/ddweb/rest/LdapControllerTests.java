@@ -32,6 +32,7 @@ public class LdapControllerTests {
     private MockMvc ldapRest;
     /**
     * default list used for tests
+     *
     */
     private static List<String> defaultStringListofFilters;
 

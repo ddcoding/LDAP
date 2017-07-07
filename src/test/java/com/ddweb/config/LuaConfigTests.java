@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *  Test class for Lua Configuration
+ *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest

@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *  Test class for connection with LDAP data store
+ *
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
