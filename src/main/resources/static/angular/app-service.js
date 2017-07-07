@@ -8,11 +8,10 @@
     SendData.$inject = ['$resource'];
 
     function SendData ($resource) {
-        var resourceUrl =  'api/filters';
+        var resourceUrl =  'api/filters/:ldapFilters';
 
-        return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true},
-            'update': { method:'PUT' }
+        return $resource(resourceUrl,{},{
+            'post':{method:'POST'}
         });
     }
 })();

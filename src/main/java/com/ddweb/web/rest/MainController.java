@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -19,12 +21,17 @@ public class MainController {
         this.ldapConnection = ldapConnection;
     }
 
-    @GetMapping("/filters")
-    public ResponseEntity<List<String>> getFilters(@RequestBody List<LdapFilter> ldapFilters){
-        if(ldapFilters!=null) {
-            List<String> filters = ldapConnection.ConnectViaLdap(ldapFilters);
-            return new ResponseEntity<>(filters, HttpStatus.OK);
-        }else
-            return ResponseEntity.badRequest().build();
+    @GetMapping("/filters/{ldapFilters}")
+    @ResponseBody
+    public void getFilters(@PathVariable String[] ldapFilters){
+        System.out.print(ldapFilters[0]);
+        System.out.print(ldapFilters[1]);
+//        List<LdapFilter> ldapFilters = new ArrayList<>();
+//        Collections.addAll(ldapFilters, ldapFiltersArray);
+//        if(!ldapFilters.isEmpty()) {
+//            List<String> filters = ldapConnection.ConnectViaLdap(ldapFilters);
+//            return new LdapFilter("lol","lel");
+//        }else
+//            return ResponseEntity.badRequest().build();
     }
 }

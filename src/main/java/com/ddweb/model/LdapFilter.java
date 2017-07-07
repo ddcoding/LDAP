@@ -1,8 +1,7 @@
 package com.ddweb.model;
 
-/**
- * Created by jakdwo on 06.07.2017.
- */
+import org.springframework.stereotype.Component;
+
 public class LdapFilter {
     private String attribute;
     private String value;
@@ -48,9 +47,6 @@ public class LdapFilter {
 
     @Override
     public String toString() {
-        return "LdapFilter{" +
-                "attribute='" + attribute + '\'' +
-                ", value='" + value + '\'' +
-                '}';
+        return attribute + " " + value;
     }
 }
