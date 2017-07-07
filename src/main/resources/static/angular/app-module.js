@@ -4,8 +4,8 @@
     angular
         .module('ldapApp', ['ui.router','ngResource']).run(run);
 
-    run.$inject = [];
-function run() {
-    // stateHandler.initialize();
+    run.$inject = ['stateHandler'];
+function run(stateHandler) {
+    stateHandler.initialize();
 }
 })();

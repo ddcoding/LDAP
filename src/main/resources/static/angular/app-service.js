@@ -10,8 +10,6 @@
     function SendData ($resource) {
         var resourceUrl =  'api/filters/:ldapFilters';
 
-        return $resource(resourceUrl,{},{
-            'post':{method:'POST'}
-        });
+        return $resource(resourceUrl);
     }
 })();
