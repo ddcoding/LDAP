@@ -31,8 +31,9 @@ public class LdapConnectionTests {
     @Test
     public void connectionWorks()
     {
-        List<LdapFilter> ldapFilters = new ArrayList<>();
-        ldapFilters.add(new LdapFilter("objectclass","Person"));
+        List<String> ldapFilters = new ArrayList<>();
+        ldapFilters.add("objectclass");
+        ldapFilters.add("Person");
         assertThat(ldapConnection.ConnectViaLdap(ldapFilters)).isNotEmpty();
     }
 }

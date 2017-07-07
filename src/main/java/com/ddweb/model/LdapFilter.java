@@ -1,7 +1,9 @@
 package com.ddweb.model;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * temp
+ */
 public class LdapFilter {
     private String attribute;
     private String value;

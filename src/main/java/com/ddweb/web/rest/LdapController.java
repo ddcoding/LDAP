@@ -11,27 +11,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Ldap REST Controller
+ */
 @RestController
 @RequestMapping("/api")
-public class MainController {
+public class LdapController {
 
     private LdapConnection ldapConnection;
+
     @Autowired
-    public MainController(LdapConnection ldapConnection) {
+    public LdapController(LdapConnection ldapConnection) {
         this.ldapConnection = ldapConnection;
     }
 
     @GetMapping("/filters/{ldapFilters}")
     @ResponseBody
-    public void getFilters(@PathVariable String[] ldapFilters){
-        System.out.print(ldapFilters[0]);
-        System.out.print(ldapFilters[1]);
-//        List<LdapFilter> ldapFilters = new ArrayList<>();
-//        Collections.addAll(ldapFilters, ldapFiltersArray);
-//        if(!ldapFilters.isEmpty()) {
-//            List<String> filters = ldapConnection.ConnectViaLdap(ldapFilters);
-//            return new LdapFilter("lol","lel");
-//        }else
-//            return ResponseEntity.badRequest().build();
+    public ResponseEntity<List<String>> getFilters(@PathVariable List<String> ldapFilters) {
+        if (!ldapFilters.isEmpty()) {
+            List<String> filters = ldapConnection.ConnectViaLdap(ldapFilters);
+            return new ResponseEntity<>(filters, HttpStatus.OK);
+        } else
+            return ResponseEntity.badRequest().build();
     }
 }

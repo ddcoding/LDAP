@@ -3,6 +3,7 @@ package com.ddweb.service;
 import com.ddweb.config.LdapConfig;
 import com.ddweb.model.LdapFilter;
 import com.ddweb.service.ContactAttrJSON;
+import org.luaj.vm2.ast.Str;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
@@ -31,17 +32,16 @@ public class LdapConnection {
      *  getting records from LDAP method
      *  @return list of records
      */
-    public List<String> ConnectViaLdap(List<LdapFilter> ldapFiltersList)
+    public List<String> ConnectViaLdap(List<String> ldapFiltersList)
     {
         AndFilter andFilter = new AndFilter();
-        for(LdapFilter ldapFilter : ldapFiltersList ){
-            andFilter.and(new EqualsFilter(ldapFilter.getAttribute(),ldapFilter.getValue()));
+        for(int i=0;i<ldapFiltersList.size();i+=2 ){
+            andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i+1)));
         }
         @SuppressWarnings("unchecked")
         List<String> stringList = ldapConfig.getTemplate().search("",andFilter.encode(),new ContactAttrJSON());
         System.out.println(stringList.toString());
         return stringList;
-        //end test filters
     }
 
 }
