@@ -12,7 +12,7 @@
             abstract: true,
             views: {
                 'index@': {
-                    templateUrl: 'WEB-INF/views/index.html',
+                    templateUrl: 'index.html',
                     controller: 'MainController',
                     controllerAs: 'vm'
                 }

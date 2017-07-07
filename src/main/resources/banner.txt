@@ -4,5 +4,4 @@ ${AnsiColor.GREEN} | |  | | |  | |${AnsiColor.RED}_      _____| |__
 ${AnsiColor.GREEN} | |  | | |  | ${AnsiColor.RED}\ \ /\ / / _ \ '_ \
 ${AnsiColor.GREEN} | |__| | |__| |${AnsiColor.RED}\ V  V /  __/ |_) |
 ${AnsiColor.GREEN} |_____/|_____/  ${AnsiColor.RED}\_/\_/ \___|_.__/
-${AnsiColor.BRIGHT_BLUE}:: DDweb .  :: Running the best development service ${sp
-:: http://ddweb.com ::${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_BLUE}:: DDweb .  :: Running the best development service ${sp:: http://ddweb.com ::${AnsiColor.DEFAULT}

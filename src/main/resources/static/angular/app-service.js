@@ -1,5 +1,6 @@
 (function() {
     'use strict';
+
     angular
         .module('ldapApp')
         .factory('SendData', SendData);
@@ -10,7 +11,7 @@
         var resourceUrl =  'api/filters';
 
         return $resource(resourceUrl, {}, {
-            'get': { method: 'GET', isArray: true},
+            'query': { method: 'GET', isArray: true},
             'update': { method:'PUT' }
         });
     }
