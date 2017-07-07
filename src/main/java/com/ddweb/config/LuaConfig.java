@@ -21,6 +21,7 @@ public class LuaConfig {
     private final static String LUA_PATH = "src/main/resources/lua/main.lua";
     /**
      *  Initialization of main.lua
+     *  @return True if lua is loaded propably from entered PATH , false if not.
      */
     public boolean LuaMainInit()
     {

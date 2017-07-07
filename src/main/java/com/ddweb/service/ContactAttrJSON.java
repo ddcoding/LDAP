@@ -15,6 +15,8 @@ import javax.naming.directory.Attributes;
 public class ContactAttrJSON implements AttributesMapper {
 
     /**
+     * @param attributes
+     * @throws NamingException
      *  @return parsed JSON object to String
      */
     @Override
