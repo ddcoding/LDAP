@@ -8,6 +8,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ *  Test class for Lua Configuration
+ */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LuaConfigTests {
@@ -16,6 +19,9 @@ public class LuaConfigTests {
     @Autowired
     private LuaConfig luaConfig;
 
+    /**
+     * checking if main file exist
+     */
     @Test
     public void luaFileConnection()
     {

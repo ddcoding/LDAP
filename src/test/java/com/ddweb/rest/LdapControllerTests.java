@@ -22,13 +22,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Created by kardro on 07.07.2017.
+ *  Test class for LDAP rest controller
+ *
+ *  @see LdapController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LdapControllerTests {
     private MockMvc ldapRest;
-
+    /**
+    * default list used for tests
+    */
     private static List<String> defaultStringListofFilters;
 
     @Autowired
@@ -61,6 +65,9 @@ public class LdapControllerTests {
         defaultStringListofFilters.add("Person");
     }
 
+    /**
+     *  sending get request to tested rest and expect to receive ok status
+     */
     @Test
     public void getFilteredEntry() throws Exception {
         ldapRest.perform(get("/api/filters/{ldapFilters}", defaultStringListofFilters))

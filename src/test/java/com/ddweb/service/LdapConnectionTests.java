@@ -16,7 +16,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by kardro on 06.07.2017.
+ *  Test class for connection with LDAP data store
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -28,6 +28,9 @@ public class LdapConnectionTests {
     public LdapConnectionTests() {
     }
 
+    /**
+     *  checking if custom entry is not empty
+     */
     @Test
     public void connectionWorks()
     {
