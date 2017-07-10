@@ -1,9 +1,12 @@
-{{vm.hey}}
 <div>
     <button ng-click="vm.addFields()">Przycisk</button>
     <div id="room_fields"></div>
     <div ng-repeat="value in vm.values track by $index">
-        <input ng-model="vm.values[$index]" type="text"/>
+        <select name="values" ng-model="vm.values[$index]">
+            <option value="admin">administrator</option>
+            <option value="mod">moderator</option>
+            <option value="user">uzytkownik</option>
+        </select>
         <button ng-click="vm.delete()">Usun mie to</button>
     </div>
     <button ng-click="vm.getValues()">Dej no te wartosci</button>
