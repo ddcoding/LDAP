@@ -5,7 +5,6 @@
     <title>LDAP</title>
 </head>
 <body ng-app="ldapApp">
-dupa
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
@@ -13,8 +12,12 @@ dupa
 <!--<script src="angular/test.js"></script>-->
 <script src="angular/app-controller.js"></script>
 <script src="angular/app-service.js"></script>
-<!--<script src="angular/app-state.js"></script>-->
+<script src="angular/app-state.js"></script>
+<script src="app/searching/searching-state.js"></script>
+<script src="app/searching/searching-controller.js"></script>
 <div ng-controller="MainController as vm">
+    <a ui-sref="searching">dupa</a>
+    <div ui-view="content"></div>
 </div>
 </body>
 </html>

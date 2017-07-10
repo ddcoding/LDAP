@@ -5,9 +5,11 @@
         .module('ldapApp')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+    stateConfig.$inject = ['$stateProvider','$locationProvider'];
 
-    function stateConfig($stateProvider) {
+    function stateConfig($stateProvider,$locationProvider) {
+        $locationProvider.hashPrefix('');
+        // $locationProvider.html5Mode(true); // uncomment it if u want to remove # from url and remember to add <base> to ur head statement
         $stateProvider.state('app', {
             abstract: true,
             views: {
