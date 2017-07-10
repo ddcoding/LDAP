@@ -35,8 +35,10 @@ public class LdapConnection {
     public List<String> ConnectViaLdap(List<String> ldapFiltersList)
     {
         AndFilter andFilter = new AndFilter();
+        andFilter.and(new EqualsFilter("objectClass","Person"));
+        andFilter.and(new EqualsFilter("ou","ou=admin,ou=Support,dc=abc,dc=com"));
         for(int i=0;i<ldapFiltersList.size();i+=2 ){
-            andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i+1)));
+            andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i) + "=" + ldapFiltersList.get(i+1) + ",ou=Support,dc=abc,dc=com"));
         }
         @SuppressWarnings("unchecked")
         List<String> stringList = ldapConfig.getTemplate().search("",andFilter.encode(),new ContactAttrJSON());

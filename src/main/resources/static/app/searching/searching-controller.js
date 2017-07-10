@@ -1,24 +1,33 @@
-(function() {
+(function () {
     'use strict';
     angular
         .module('ldapApp')
-        .controller('SearchingController',SearchingController);
+        .controller('SearchingController', SearchingController);
 
-    SearchingController.$inject = [];
+    SearchingController.$inject = ['SendData'];
 
-    function SearchingController() {
-        var vm = this ;
+    function SearchingController(SendData) {
+        var vm = this;
         vm.hey = "Hello world ! ";
+        vm.values = [];
+        vm.addFields = function () {
+            vm.values[vm.values.length++] = [];
+        };
+        vm.getValues = function(){
+            for(var i=0; i<vm.values.length;i++)
+                console.log(vm.values[i]);
+            SendData.query({ldapFilters: vm.values},onSuccess,onError);
+        };
+        vm.delete = function () {
+          vm.values.splice(vm.values.length-1,1);
+        };
+        function onSuccess(data) {
+            vm.ldapFilteredList = data;
+            alert(data);
+        }
+        function onError() {
+            alert(" i nie wyszlo");
+        }
     }
-    var room = 1;
-    function add_fields() {
-        room++;
-        var objTo = document.getElementById('room_fileds')
-        var divtest = document.createElement("div");
-        divtest.innerHTML = '<div class="label">Room ' + room +':</div><div class="content"><span>Width: <input type="text" style="width:48px;" name="width[]" value="" /><small>(ft)</small> X</span><span>Length: <input type="text" style="width:48px;" namae="length[]" value="" /><small>(ft)</small></span></div>';
-
-        objTo.appendChild(divtest)
-    }
-
 
 })();

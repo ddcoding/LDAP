@@ -61,8 +61,9 @@ public class LdapControllerTests {
                 return v;
             }
         };
-        defaultStringListofFilters.add("objectclass");
-        defaultStringListofFilters.add("Person");
+        defaultStringListofFilters.add("admin");
+        defaultStringListofFilters.add("mod");
+        defaultStringListofFilters.add("user");
     }
 
     /**

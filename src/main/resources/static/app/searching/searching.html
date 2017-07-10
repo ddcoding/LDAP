@@ -1,2 +1,10 @@
 {{vm.hey}}
-<button onclick=""></button>
+<div>
+    <button ng-click="vm.addFields()">Przycisk</button>
+    <div id="room_fields"></div>
+    <div ng-repeat="value in vm.values track by $index">
+        <input ng-model="vm.values[$index]" type="text"/>
+        <button ng-click="vm.delete()">Usun mie to</button>
+    </div>
+    <button ng-click="vm.getValues()">Dej no te wartosci</button>
+</div>
