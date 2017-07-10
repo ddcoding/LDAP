@@ -17,7 +17,7 @@ public class Interpreter {
     }
 
     /**
-     * @param value
+     * @param value - type of record from LDAP
      * @return key for LDAP communication
      */
     public String interpret(String value) {
@@ -37,7 +37,7 @@ public class Interpreter {
     /**
      * That method is merging values with keys using interpret method.
      *
-     * @param valuesList
+     * @param valuesList - List of values of records from Angular used for search, which is merged with attributes
      * @return newList which contains pairs of key and value. In first index of list, we have key and in the second we have value. newList[0] = key , newList[1] = value
      */
     public List<String> merge(List<String> valuesList) {

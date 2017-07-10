@@ -15,8 +15,8 @@ import javax.naming.directory.Attributes;
 public class ContactAttrJSON implements AttributesMapper {
 
     /**
-     * @param attributes
-     * @throws NamingException
+     * @param attributes - Attributes of records in LDAP which are used for search purposes
+     * @throws NamingException - when wrong naming occurs
      *  @return parsed JSON object to String
      */
     @Override

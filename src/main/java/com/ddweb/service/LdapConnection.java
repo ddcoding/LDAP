@@ -31,7 +31,7 @@ public class LdapConnection {
 
     /**
      * getting records from LDAP method
-     *
+     *  @param ldapFiltersList - list of attributes with values used for filtering LDAP data store
      * @return list of records
      */
     public List<String> ConnectViaLdap(List<String> ldapFiltersList) {

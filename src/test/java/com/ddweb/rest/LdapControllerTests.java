@@ -89,6 +89,7 @@ public class LdapControllerTests {
 
     /**
      * sending get request to tested rest and expect to receive ok status
+     * @throws Exception when error with REST occurs
      */
     @Test
     public void getFilteredEntry() throws Exception {
@@ -98,6 +99,7 @@ public class LdapControllerTests {
 
     /**
      * Wrong data test
+     * @throws Exception when error with REST occurs
      */
     @Test
     public void getFilteredErr() throws Exception {
@@ -107,6 +109,7 @@ public class LdapControllerTests {
 
     /**
      * Empty data test
+     * @throws Exception when error with REST occurs
     */
     @Test
     public void getEmptyErr() throws Exception{
@@ -116,6 +119,7 @@ public class LdapControllerTests {
     }
     /**
      * Null data test
+     * @throws Exception when error with REST occurs
     */
     @Test
     public void getNullErr() throws Exception{
