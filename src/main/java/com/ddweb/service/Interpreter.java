@@ -10,14 +10,14 @@ import java.util.List;
 @Component
 public class Interpreter {
 
-    public Pair<String,String> interpret(String s) {
+    public String interpret(String s) {
         switch (s) {
             case "admin":
-                return new Pair<>("ou", "admin");
+                return "ou";
             case "user":
-                return new Pair<>("ou", "user");
+                return "ou";
             case "mod":
-                return new Pair<>("ou", "mod");
+                return "ou";
             default:
                 return null;
         }
@@ -25,12 +25,12 @@ public class Interpreter {
 
     public List<String> merge(List<String> strings){
         List<String> newList = new ArrayList<>();
-        Pair<String,String> pair;
+        String inter;
         for(String s:strings){
-            pair = interpret(s);
-            if(pair!=null) {
-                newList.add(pair.getK());
-                newList.add(pair.getL());
+            inter = interpret(s);
+            if(inter!=null) {
+                newList.add(inter);
+                newList.add(s);
             }
         }
         return newList;
