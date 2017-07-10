@@ -1,5 +1,6 @@
 package com.ddweb.web.rest;
 
+import com.ddweb.enums.ConvertType;
 import com.ddweb.model.LdapFilter;
 import com.ddweb.service.Interpreter;
 import com.ddweb.service.LdapConnection;
@@ -42,7 +43,7 @@ public class LdapController {
         if (!ldapFilters.isEmpty()) {
             List<String> interpretedList = interpreter.merge(ldapFilters);
             if (!interpretedList.isEmpty()) {
-                List<String> filters = ldapConnection.ConnectViaLdap(interpretedList);
+                List<String> filters = ldapConnection.connectViaLdap(interpretedList, ConvertType.NAMES);
                 return new ResponseEntity<>(filters, HttpStatus.OK);
             } else {
                 System.err.print("BLEDNE DANE !");

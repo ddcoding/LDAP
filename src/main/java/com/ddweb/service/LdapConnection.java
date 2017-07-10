@@ -1,8 +1,10 @@
 package com.ddweb.service;
 
 import com.ddweb.config.LdapConfig;
+import com.ddweb.enums.ConvertType;
 import com.ddweb.model.LdapFilter;
 import com.ddweb.service.ContactAttrJSON;
+import org.json.JSONObject;
 import org.luaj.vm2.ast.Str;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.filter.AndFilter;
@@ -10,6 +12,7 @@ import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,17 +37,43 @@ public class LdapConnection {
      *  @param ldapFiltersList - list of attributes with values used for filtering LDAP data store
      * @return list of records
      */
-    public List<String> ConnectViaLdap(List<String> ldapFiltersList) {
-        if (ldapFiltersList != null && !ldapFiltersList.isEmpty()) {
+    public List<String> connectViaLdap(List<String> ldapFiltersList, ConvertType convertType) {
+        if (ldapFiltersList != null && !ldapFiltersList.isEmpty() && convertType != null) {
             AndFilter andFilter = new AndFilter();
             for (int i = 0; i < ldapFiltersList.size(); i += 2) {
                 andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i+1)));
             }
             @SuppressWarnings("unchecked")
-            List<String> stringList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
+            List<Object> joList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
+            List<String> stringList = convert(joList,convertType);
             System.out.println(stringList.toString());
             return stringList;
         } else return null;
     }
+
+    /**
+     * It's method which helps convert JSONObject to specified string
+     * @param objectList - List of JSONObjects to filter
+     * @param convertType - Enum for one of cases
+     * @see ConvertType
+     * @return Filtered string list
+     */
+    private List<String> convert(List<Object> objectList, ConvertType convertType)
+    {
+            List<String> stringList = new ArrayList<>();
+        switch (convertType) {
+            case NAMES:
+            for (Object o : objectList)
+                stringList.add(((JSONObject) o).get("cn") + " " + ((JSONObject) o).get("sn"));
+            break;
+            case GROUPS:
+            for (Object o : objectList)
+                stringList.add((String) ((JSONObject) o).get("ou"));
+            break;
+        }
+        return stringList;
+    }
+
+
 
 }

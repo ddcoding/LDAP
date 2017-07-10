@@ -38,6 +38,7 @@ public class Interpreter {
     /**
      * @param value - type of record from LDAP
      * @return pair which contains value,key for LDAP communication
+     * @see Pair
      */
     public Pair<String,String> interpret(String value) {
         if(value!=null)
