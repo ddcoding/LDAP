@@ -13,18 +13,18 @@ import java.util.Collections;
 import java.util.List;
 
 
-
 /**
- *  Ldap REST Controller for pulling and pushing records
+ * Ldap REST Controller for pulling and pushing records
  */
 @RestController
 @RequestMapping("/api")
 public class LdapController {
     /**
-     *  Variable used to get filtered records from LDAP
+     * Variable used to get filtered records from LDAP
      */
     private LdapConnection ldapConnection;
     private Interpreter interpreter;
+
     @Autowired
     public LdapController(LdapConnection ldapConnection, Interpreter interpreter) {
         this.ldapConnection = ldapConnection;
@@ -33,16 +33,21 @@ public class LdapController {
 
 
     /**
-     *  @param ldapFilters list of attributes
-     *  @return list of filtered records
+     * @param ldapFilters list of attributes
+     * @return list of filtered records
      */
     @GetMapping("/filters/{ldapFilters}")
     @ResponseBody
     public ResponseEntity<List<String>> getFilters(@PathVariable List<String> ldapFilters) {
         if (!ldapFilters.isEmpty()) {
             List<String> interpretedList = interpreter.merge(ldapFilters);
-            List<String> filters = ldapConnection.ConnectViaLdap(interpretedList);
-            return new ResponseEntity<>(filters, HttpStatus.OK);
+            if (!interpretedList.isEmpty()) {
+                List<String> filters = ldapConnection.ConnectViaLdap(interpretedList);
+                return new ResponseEntity<>(filters, HttpStatus.OK);
+            } else {
+                System.err.print("BLEDNE DANE !");
+                return ResponseEntity.badRequest().build();
+            }
         } else
             return ResponseEntity.badRequest().build();
     }

@@ -14,36 +14,37 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *  Receiving data from LDAP data store
+ * Receiving data from LDAP data store
  */
 @Service
 public class LdapConnection {
 
     /**
-     *  used for getting LdapTemplate
+     * used for getting LdapTemplate
      */
     private final LdapConfig ldapConfig;
+
     @Autowired
     public LdapConnection(LdapConfig ldapConfig) {
         this.ldapConfig = ldapConfig;
     }
 
     /**
-     *  getting records from LDAP method
-     *  @return list of records
+     * getting records from LDAP method
+     *
+     * @return list of records
      */
-    public List<String> ConnectViaLdap(List<String> ldapFiltersList)
-    {
-        AndFilter andFilter = new AndFilter();
-        andFilter.and(new EqualsFilter("objectClass","Person"));
-        andFilter.and(new EqualsFilter("ou","ou=admin,ou=Support,dc=abc,dc=com"));
-        for(int i=0;i<ldapFiltersList.size();i+=2 ){
-            andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i) + "=" + ldapFiltersList.get(i+1) + ",ou=Support,dc=abc,dc=com"));
-        }
-        @SuppressWarnings("unchecked")
-        List<String> stringList = ldapConfig.getTemplate().search("",andFilter.encode(),new ContactAttrJSON());
-        System.out.println(stringList.toString());
-        return stringList;
+    public List<String> ConnectViaLdap(List<String> ldapFiltersList) {
+        if (ldapFiltersList != null && !ldapFiltersList.isEmpty()) {
+            AndFilter andFilter = new AndFilter();
+            for (int i = 0; i < ldapFiltersList.size(); i += 2) {
+                andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i) + "=" + ldapFiltersList.get(i + 1) + ",ou=Support,dc=abc,dc=com"));
+            }
+            @SuppressWarnings("unchecked")
+            List<String> stringList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
+            System.out.println(stringList.toString());
+            return stringList;
+        } else return null;
     }
 
 }

@@ -35,6 +35,12 @@ public class LdapControllerTests {
      */
     private static List<String> defaultStringListofFilters;
 
+    private static List<String> defaultStringListofBadFilters;
+
+    private static List<String> defaultEmptyList;
+
+    private static List<String> defaultNullList;
+
     @Autowired
     private LdapController ldapController;
 
@@ -51,7 +57,19 @@ public class LdapControllerTests {
 
     @Before
     public void fillList() {
+        defaultEmptyList = new ArrayList<>();
+        defaultEmptyList.clear();
         defaultStringListofFilters = new ArrayList<String>() {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public String toString() {
+                String v = super.toString();
+                v = v.substring(1, v.length() - 1);
+                return v;
+            }
+        };
+        defaultStringListofBadFilters = new ArrayList<String>() {
             private static final long serialVersionUID = 1L;
 
             @Override
@@ -64,6 +82,9 @@ public class LdapControllerTests {
         defaultStringListofFilters.add("admin");
         defaultStringListofFilters.add("mod");
         defaultStringListofFilters.add("user");
+
+        defaultStringListofBadFilters.add("adminnn");
+        defaultStringListofBadFilters.add("bielelelele");
     }
 
     /**
@@ -75,5 +96,31 @@ public class LdapControllerTests {
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Wrong data test
+     */
+    @Test
+    public void getFilteredErr() throws Exception {
+        ldapRest.perform(get("/api/filters/{ldapFilters}",defaultStringListofBadFilters))
+                .andExpect(status().isBadRequest());
+    }
+
+    /**
+     * Empty data test
+    */
+    @Test
+    public void getEmptyErr() throws Exception{
+        defaultEmptyList.clear();
+      ldapRest.perform(get("/api/filters/{ldapFilters}",defaultEmptyList))
+                .andExpect(status().isBadRequest());
+    }
+    /**
+     * Null data test
+    */
+    @Test
+    public void getNullErr() throws Exception{
+      ldapRest.perform(get("/api/filters/{ldapFilters}",defaultNullList))
+                .andExpect(status().isNotFound());
+    }
 
 }

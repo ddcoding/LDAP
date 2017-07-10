@@ -28,4 +28,12 @@ public class LuaConfigTests {
     {
         assertThat(luaConfig.LuaMainInit()).isTrue();
     }
+    /**
+     * checking if main file doesn't exist
+     */
+    @Test
+    public void luaFileConnectionFailure()
+    {
+        assertThat(luaConfig.LuaMainInit()).isFalse();
+    }
 }

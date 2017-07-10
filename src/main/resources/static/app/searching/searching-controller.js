@@ -10,6 +10,7 @@
         var vm = this;
         vm.hey = "Hello world ! ";
         vm.values = [];
+        vm.result = [];
         vm.addFields = function () {
             vm.values[vm.values.length++] = [];
         };
@@ -22,8 +23,7 @@
           vm.values.splice(vm.values.length-1,1);
         };
         function onSuccess(data) {
-            vm.ldapFilteredList = data;
-            alert(data);
+            vm.result = data;
         }
         function onError() {
             alert(" i nie wyszlo");

@@ -16,8 +16,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- *  Test class for connection with LDAP data store
- *
+ * Test class for connection with LDAP data store
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,18 +25,43 @@ public class LdapConnectionTests {
     @Autowired
     private LdapConnection ldapConnection;
 
-    public LdapConnectionTests() {
+    /**
+     * checking if custom entry is not empty with correct data
+     */
+    @Test
+    public void connectionResultsSuccess() {
+        List<String> ldapFilters = new ArrayList<>();
+        ldapFilters.add("ou");
+        ldapFilters.add("admin");
+        assertThat(ldapConnection.ConnectViaLdap(ldapFilters)).isNotEmpty();
     }
 
     /**
-     *  checking if custom entry is not empty
+     * checking if custom entry is empty with wrong data
      */
     @Test
-    public void connectionWorks()
-    {
+    public void connectionResultsFailure() {
         List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("objectclass");
-        ldapFilters.add("Person");
-        assertThat(ldapConnection.ConnectViaLdap(ldapFilters)).isNotEmpty();
+        ldapFilters.add("sometext");
+        ldapFilters.add("Wrong");
+        assertThat(ldapConnection.ConnectViaLdap(ldapFilters)).isEmpty();
     }
+
+    /**
+     * checking if custom entry is null with null data
+     */
+    @Test
+    public void connectionResultsNull() {
+        assertThat(ldapConnection.ConnectViaLdap(null)).isNull();
+    }
+
+    /**
+     * checking if custom entry is empty with wrong data
+     */
+    @Test
+    public void connectionResultsEmpty() {
+        List<String> ldapFilters = new ArrayList<>();
+        assertThat(ldapConnection.ConnectViaLdap(ldapFilters)).isNull();
+    }
+
 }

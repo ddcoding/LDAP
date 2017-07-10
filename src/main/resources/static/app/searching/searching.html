@@ -7,4 +7,7 @@
         <button ng-click="vm.delete()">Usun mie to</button>
     </div>
     <button ng-click="vm.getValues()">Dej no te wartosci</button>
+    <div ng-repeat="result in vm.result track by $index">
+        <span>{{vm.result[$index]}}</span>
+    </div>
 </div>
