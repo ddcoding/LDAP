@@ -38,7 +38,7 @@ public class LdapConnection {
         if (ldapFiltersList != null && !ldapFiltersList.isEmpty()) {
             AndFilter andFilter = new AndFilter();
             for (int i = 0; i < ldapFiltersList.size(); i += 2) {
-                andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i) + "=" + ldapFiltersList.get(i + 1) + ",ou=Support,dc=abc,dc=com"));
+                andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i+1)));
             }
             @SuppressWarnings("unchecked")
             List<String> stringList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());

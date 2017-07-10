@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -24,9 +25,20 @@ public class MergeTest {
     @Autowired
     private Interpreter interpreter;
 
+    @Autowired
+    private Environment env;
+
     private List<String> stringList;
 
     private List<String> stringWrongList;
+
+    private static final String GROUP_ADMIN = "ou=admin";
+
+    private static final String GROUP_USER = "ou=user";
+
+    private static final String GROUP_MOD = "ou=mod";
+
+    private static final String GROUP_SUPPORT = "ou=Support";
 
     @Before
     public void fillList()
@@ -50,9 +62,9 @@ public class MergeTest {
     {
         assertThat(interpreter.merge(stringList))
                 .contains("ou")
-                .contains("admin")
-                .contains("user")
-                .contains("mod");
+                .contains(MergeTest.GROUP_ADMIN + "," + MergeTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"))
+                .contains(MergeTest.GROUP_USER + "," + MergeTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"))
+                .contains(MergeTest.GROUP_MOD + "," + MergeTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"));
     }
 
     /**
@@ -63,9 +75,9 @@ public class MergeTest {
     {
         assertThat(interpreter.merge(stringWrongList))
                 .doesNotContain("ou")
-                .doesNotContain("admin")
-                .doesNotContain("user")
-                .doesNotContain("mod");
+                .doesNotContain(MergeTest.GROUP_ADMIN + "," + MergeTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"))
+                .doesNotContain(MergeTest.GROUP_USER + "," + MergeTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"))
+                .doesNotContain(MergeTest.GROUP_MOD + "," + MergeTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"));
     }
 
     /**

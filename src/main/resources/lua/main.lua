@@ -1,3 +1,4 @@
+print("LUA WORKS!")
 Car = {
     x = 0,
     mt = {},
@@ -14,7 +15,7 @@ Car = {
     end,
 
     Wypisz = function(self)
-        print(self.x)
+--        print(self.x)
     end
 }
 Car.mt.__add = function(a,b)
@@ -44,8 +45,8 @@ v2.x = 6
 v3 = Car.New()
 v3 = v1 + v2
 v3:Wypisz()
-print(v1 == v2) -- false of course
-print(v3) -- toString test
+--print(v1 == v2) -- false of course
+--print(v3) -- toString test
 
 
 

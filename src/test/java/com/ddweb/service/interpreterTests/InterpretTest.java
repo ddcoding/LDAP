@@ -1,11 +1,13 @@
 package com.ddweb.service.interpreterTests;
 
 import com.ddweb.service.Interpreter;
+import com.ddweb.structures.Pair;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.env.Environment;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -21,8 +23,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class InterpretTest {
 
+    private static final String GROUP_ADMIN = "ou=admin";
+
+    private static final String GROUP_SUPPORT = "ou=Support";
+
+    private Pair<String,String> correctPair;
+
     @Autowired
     private Interpreter interpreter;
+
+    @Autowired
+    private Environment env;
+
+    @Before
+    public void fillPair()
+    {
+        correctPair = new Pair<>("ou",InterpretTest.GROUP_ADMIN + "," + InterpretTest.GROUP_SUPPORT + "," + env.getProperty("LdapBase"));
+    }
 
     /**
      *  check behaviour with correct data
@@ -30,14 +47,14 @@ public class InterpretTest {
     @Test
     public void interpSuccess()
     {
-        assertThat(interpreter.interpret("admin")).isEqualTo("ou");
+        assertThat(interpreter.interpret("admin")).isEqualTo(correctPair);
     }
 
     /**
      *  check behaviour with wrong data
      */
     @Test
-    public void interpFailure(){assertThat(interpreter.interpret("value")).isNotEqualTo("ou");}
+    public void interpFailure(){assertThat(interpreter.interpret("value")).isNotEqualTo(correctPair);}
 
     /**
      *  check behaviour with null data

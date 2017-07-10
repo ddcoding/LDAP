@@ -28,6 +28,6 @@ public class ContactAttrJSON implements AttributesMapper {
             String id = ids.next();
             jo.put(id,attributes.get(id).get());
         }
-        return jo.get("cn") + " " + jo.get("sn");
+        return jo;
     }
 }
