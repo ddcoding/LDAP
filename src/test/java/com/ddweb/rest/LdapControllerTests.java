@@ -22,18 +22,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- *  Test class for LDAP rest controller
+ * Test class for LDAP rest controller
  *
- *  @see LdapController
+ * @see LdapController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LdapControllerTests {
     private MockMvc ldapRest;
     /**
-    * default list used for tests
-     *
-    */
+     * default list used for tests
+     */
     private static List<String> defaultStringListofFilters;
 
     @Autowired
@@ -52,22 +51,22 @@ public class LdapControllerTests {
 
     @Before
     public void fillList() {
-        defaultStringListofFilters = new ArrayList<String>(){
-                private static final long serialVersionUID = 1L;
+        defaultStringListofFilters = new ArrayList<String>() {
+            private static final long serialVersionUID = 1L;
 
-                @Override public String toString()
-                {
-                    String v = super.toString();
-                    v = v.substring(1,v.length()-1);
-                    return v;
-                }
-            };
+            @Override
+            public String toString() {
+                String v = super.toString();
+                v = v.substring(1, v.length() - 1);
+                return v;
+            }
+        };
         defaultStringListofFilters.add("objectclass");
         defaultStringListofFilters.add("Person");
     }
 
     /**
-     *  sending get request to tested rest and expect to receive ok status
+     * sending get request to tested rest and expect to receive ok status
      */
     @Test
     public void getFilteredEntry() throws Exception {
