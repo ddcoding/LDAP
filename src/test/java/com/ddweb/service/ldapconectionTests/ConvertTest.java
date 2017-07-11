@@ -48,7 +48,7 @@ public class ConvertTest {
     @Before
     public void listFilling() {
         OrFilter orFilter = new OrFilter();
-        orFilter.or(new EqualsFilter("objectclass", "Person"));
+        orFilter.or(new EqualsFilter("objectClass", "People"));
         listOfCorrectObjects = ldapConfig.getTemplate().search("", orFilter.encode(), new ContactAttrJSON());
 
         listOfWrongObjects = new ArrayList<>();

@@ -2,7 +2,7 @@
     <button ng-click="vm.addFields()">Przycisk</button>
     <div id="room_fields"></div>
     <div ng-repeat="value in vm.values track by $index">
-        <select name="values" ng-model="vm.values[$index]">
+        <select name="values" ng-model="vm.values[$index]" ng-click="vm.getGroups()">
             <option ng-repeat="groups in vm.groups track by $index" value="{{groups}}" >{{groups}}</option>
         </select>
         <button ng-click="vm.delete()">Usun mie to</button>
