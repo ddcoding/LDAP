@@ -34,18 +34,19 @@ public class LdapConnection {
 
     /**
      * getting records from LDAP method
-     *  @param ldapFiltersList - list of attributes with values used for filtering LDAP data store
+     *
+     * @param ldapFiltersList - list of attributes with values used for filtering LDAP data store
      * @return list of records
      */
     public List<String> connectViaLdap(List<String> ldapFiltersList, ConvertType convertType) {
         if (ldapFiltersList != null && !ldapFiltersList.isEmpty() && convertType != null) {
             AndFilter andFilter = new AndFilter();
             for (int i = 0; i < ldapFiltersList.size(); i += 2) {
-                andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i+1)));
+                andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i + 1)));
             }
             @SuppressWarnings("unchecked")
             List<Object> joList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
-            List<String> stringList = convert(joList,convertType);
+            List<String> stringList = convert(joList, convertType);
             System.out.println(stringList.toString());
             return stringList;
         } else return null;
@@ -53,27 +54,36 @@ public class LdapConnection {
 
     /**
      * It's method which helps convert JSONObject to specified string
-     * @param objectList - List of JSONObjects to filter
+     *
+     * @param objectList  - List of JSONObjects to filter
      * @param convertType - Enum for one of cases
-     * @see ConvertType
      * @return Filtered string list
+     * @see ConvertType
      */
-    private List<String> convert(List<Object> objectList, ConvertType convertType)
-    {
+    public List<String> convert(List<Object> objectList, ConvertType convertType) {
+        if(objectList!=null && convertType !=null) {
             List<String> stringList = new ArrayList<>();
-        switch (convertType) {
-            case NAMES:
-            for (Object o : objectList)
-                stringList.add(((JSONObject) o).get("cn") + " " + ((JSONObject) o).get("sn"));
-            break;
-            case GROUPS:
-            for (Object o : objectList)
-                stringList.add((String) ((JSONObject) o).get("ou"));
-            break;
-        }
-        return stringList;
+            switch (convertType) {
+                case NAMES:
+                    for (Object o : objectList)
+                        try {
+                            stringList.add(((JSONObject) o).get("cn") + " " + ((JSONObject) o).get("sn"));
+                        } catch (ClassCastException ignored) {
+                            System.err.println("Got wrong list as param!");
+                        }
+                    break;
+                case GROUPS:
+                    for (Object o : objectList)
+                        try {
+                            stringList.add((String) ((JSONObject) o).get("ou"));
+                        } catch (ClassCastException ignored) {
+                            System.err.println("Got wrong list as param!");
+                        }
+                    break;
+            }
+            return stringList;
+        }else return null;
     }
-
 
 
 }
