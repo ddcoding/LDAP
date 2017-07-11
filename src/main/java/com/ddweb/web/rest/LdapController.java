@@ -63,8 +63,8 @@ public class LdapController {
     @ResponseBody
     public ResponseEntity<List<String>> getRoles() {
         List<String> filters = new ArrayList<>();
-        filters.add("objectclass");
-        filters.add("group");
+        filters.add("ou");
+        filters.add("ROLE");
         filters = ldapConnection.connectViaLdap(filters,ConvertType.GROUPS);
         if(filters != null) return new ResponseEntity<>(filters,HttpStatus.OK);
         else return ResponseEntity.badRequest().build();
