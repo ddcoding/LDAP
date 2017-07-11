@@ -1,9 +1,10 @@
-package com.ddweb.rest;
+package com.ddweb.rest.LdapController;
 
 import com.ddweb.web.rest.LdapController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.luaj.vm2.ast.Str;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,13 +20,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Test class for LDAP rest controller
+ * Test class for LDAP rest controller. This class is for test method <b>GET</b> for download filtered <b>USERS</b>
  *
  * @see LdapController
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class LdapControllerTests {
+public class LdapControllerGetFilterTests {
     private MockMvc ldapRest;
     /**
      * default list used for tests
@@ -37,6 +38,8 @@ public class LdapControllerTests {
     private static List<String> defaultEmptyList;
 
     private static List<String> defaultNullList;
+
+    private static final String urlRESTapi = "/api/ldap/filters/{ldapFilters}";
 
     @Autowired
     private LdapController ldapController;
@@ -90,7 +93,7 @@ public class LdapControllerTests {
      */
     @Test
     public void getFilteredEntry() throws Exception {
-        ldapRest.perform(get("/api/filters/{ldapFilters}", defaultStringListofFilters))
+        ldapRest.perform(get(LdapControllerGetFilterTests.urlRESTapi, defaultStringListofFilters))
                 .andExpect(status().isOk());
     }
 
@@ -100,7 +103,7 @@ public class LdapControllerTests {
      */
     @Test
     public void getFilteredErr() throws Exception {
-        ldapRest.perform(get("/api/filters/{ldapFilters}",defaultStringListofBadFilters))
+        ldapRest.perform(get(LdapControllerGetFilterTests.urlRESTapi,defaultStringListofBadFilters))
                 .andExpect(status().isBadRequest());
     }
 
@@ -111,7 +114,7 @@ public class LdapControllerTests {
     @Test
     public void getEmptyErr() throws Exception{
         defaultEmptyList.clear();
-      ldapRest.perform(get("/api/filters/{ldapFilters}",defaultEmptyList))
+      ldapRest.perform(get(LdapControllerGetFilterTests.urlRESTapi,defaultEmptyList))
                 .andExpect(status().isBadRequest());
     }
     /**
@@ -120,7 +123,7 @@ public class LdapControllerTests {
     */
     @Test
     public void getNullErr() throws Exception{
-      ldapRest.perform(get("/api/filters/{ldapFilters}",defaultNullList))
+      ldapRest.perform(get(LdapControllerGetFilterTests.urlRESTapi,defaultNullList))
                 .andExpect(status().isNotFound());
     }
 

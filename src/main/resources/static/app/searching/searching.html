@@ -3,9 +3,7 @@
     <div id="room_fields"></div>
     <div ng-repeat="value in vm.values track by $index">
         <select name="values" ng-model="vm.values[$index]">
-            <option value="admin">administrator</option>
-            <option value="mod">moderator</option>
-            <option value="user">uzytkownik</option>
+            <option ng-repeat="groups in vm.groups track by $index" value="{{groups}}" >{{groups}}</option>
         </select>
         <button ng-click="vm.delete()">Usun mie to</button>
     </div>

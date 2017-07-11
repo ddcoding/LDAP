@@ -18,7 +18,7 @@ import java.util.List;
  * Ldap REST Controller for pulling and pushing records
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/ldap")
 public class LdapController {
     /**
      * Variable used to get filtered records from LDAP
@@ -34,8 +34,9 @@ public class LdapController {
 
 
     /**
+     * It's <b>GET</b> method for download list of <b>names and surnames</b> as results after filtering data from client side.
      * @param ldapFilters list of attributes
-     * @return list of filtered records
+     * @return status 200 and list of filtered records downloaded from LDAP repository or status 400 when param data is wrong or something else is wrong
      */
     @GetMapping("/filters/{ldapFilters}")
     @ResponseBody
@@ -51,5 +52,20 @@ public class LdapController {
             }
         } else
             return ResponseEntity.badRequest().build();
+    }
+
+    /**
+     * It's <b>GET</b> method for download list of <b>GROUPS</b> from client side.
+     * @return status 200 and list of groups downloaded from LDAP repository or status 400 when something is wrong
+     */
+    @GetMapping("/groups")
+    @ResponseBody
+    public ResponseEntity<List<String>> getRoles() {
+        List<String> filters = new ArrayList<>();
+        filters.add("ou");
+        filters.add("ROLE");
+        filters = ldapConnection.connectViaLdap(filters,ConvertType.GROUPS);
+        if(filters != null) return new ResponseEntity<>(filters,HttpStatus.OK);
+        else return ResponseEntity.badRequest().build();
     }
 }

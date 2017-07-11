@@ -4,15 +4,31 @@
         .module('ldapApp')
         .controller('SearchingController', SearchingController);
 
-    SearchingController.$inject = ['SendData'];
+    SearchingController.$inject = ['SendData','GetGroupsLdap'];
 
-    function SearchingController(SendData) {
+    function SearchingController(SendData,GetGroupsLdap) {
         var vm = this;
         vm.values = [];
         vm.result = [];
+        vm.groups = [];
         vm.addFields = function () {
             vm.values[vm.values.length++] = [];
         };
+
+
+        var getGroups = function () {
+            GetGroupsLdap.query({},onSuccessGroups,onErrorGroups)
+        };
+
+            getGroups();
+        function onSuccessGroups(data) {
+            vm.groups = data;
+        }
+        
+        function onErrorGroups(status) {
+            alert("Wystapil problem ze statusem: " + status);
+        }
+        
         vm.getValues = function(){
             for(var i=0; i<vm.values.length;i++)
                 console.log(vm.values[i]);
