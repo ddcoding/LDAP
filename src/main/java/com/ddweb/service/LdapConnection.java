@@ -67,7 +67,8 @@ public class LdapConnection {
                 case NAMES:
                     for (Object o : objectList)
                         try {
-                            stringList.add(((JSONObject) o).get("cn") + " " + ((JSONObject) o).get("sn"));
+//                            stringList.add(((JSONObject) o).get("cn") + " " + ((JSONObject) o).get("sn"));
+                            stringList.add((String) ((JSONObject) o).get("cn"));
                         } catch (ClassCastException ignored) {
                             System.err.println("Got wrong list as param!");
                         }
@@ -75,7 +76,7 @@ public class LdapConnection {
                 case GROUPS:
                     for (Object o : objectList)
                         try {
-                            stringList.add((String) ((JSONObject) o).get("ou"));
+                            stringList.add((String) ((JSONObject) o).get("cn"));
                         } catch (ClassCastException ignored) {
                             System.err.println("Got wrong list as param!");
                         }

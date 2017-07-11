@@ -39,8 +39,6 @@ public class ConvertTest {
 
     private List<Object> listOfWrongObjects;
 
-    private List<Object> nullList;
-
     private List<String> correctResultNames;
 
     private List<String> correctResultGroups;
@@ -48,7 +46,7 @@ public class ConvertTest {
     @Before
     public void listFilling() {
         OrFilter orFilter = new OrFilter();
-        orFilter.or(new EqualsFilter("objectClass", "People"));
+        orFilter.or(new EqualsFilter("objectclass", "People"));
         listOfCorrectObjects = ldapConfig.getTemplate().search("", orFilter.encode(), new ContactAttrJSON());
 
         listOfWrongObjects = new ArrayList<>();
@@ -96,12 +94,12 @@ public class ConvertTest {
 
     @Test
     public void convertWithNullDataNames(){
-        assertThat(ldapConnection.convert(nullList,ConvertType.NAMES)).isNull();
+        assertThat(ldapConnection.convert(null,ConvertType.NAMES)).isNull();
     }
 
     @Test
     public void convertWithNullDataGroups(){
-        assertThat(ldapConnection.convert(nullList,ConvertType.GROUPS)).isNull();
+        assertThat(ldapConnection.convert(null,ConvertType.GROUPS)).isNull();
     }
 
     @Test

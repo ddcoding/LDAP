@@ -1,7 +1,10 @@
 package com.ddweb.config;
 
+import com.ddweb.annotations.DevProfile;
+import com.ddweb.annotations.ProdProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.ldap.core.LdapOperations;
@@ -13,7 +16,6 @@ import org.springframework.ldap.core.support.LdapContextSource;
  *  Ldap configuration file
  */
 @Configuration
-@PropertySource("classpath:application.properties")
 public class LdapConfig {
    /**
     *   Variable is used for using properties file
@@ -39,6 +41,8 @@ public class LdapConfig {
         ctx.setUserDn(userDn);
         ctx.setPassword(password);
         ctx.afterPropertiesSet();
-        return new LdapTemplate(ctx);
+        LdapTemplate ldapTemplate = new LdapTemplate(ctx);
+        ldapTemplate.setIgnorePartialResultException(true);
+        return ldapTemplate;
     }
 }

@@ -6,7 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -38,8 +40,8 @@ public class LdapConnectionTests {
     @Test
     public void connectionResultsSuccess() {
         List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("ou");
-        ldapFilters.add(LdapConnectionTests.GROUP_ADMIN + "," + LdapConnectionTests.GROUP_SUPPORT + "," + env.getProperty("LdapBase"));
+        ldapFilters.add("objectclass");
+        ldapFilters.add("person");
         assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.NAMES)).isNotEmpty();
     }
     /**
@@ -49,8 +51,8 @@ public class LdapConnectionTests {
     @Test
     public void connectionResultsSuccess2() {
         List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("ou");
-        ldapFilters.add("ROLE");
+        ldapFilters.add("objectclass");
+        ldapFilters.add("group");
         assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.GROUPS)).isNotEmpty();
     }
 

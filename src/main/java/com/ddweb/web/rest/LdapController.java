@@ -1,5 +1,6 @@
 package com.ddweb.web.rest;
 
+import com.ddweb.annotations.DevProfile;
 import com.ddweb.enums.ConvertType;
 import com.ddweb.model.LdapFilter;
 import com.ddweb.service.Interpreter;
@@ -62,8 +63,8 @@ public class LdapController {
     @ResponseBody
     public ResponseEntity<List<String>> getRoles() {
         List<String> filters = new ArrayList<>();
-        filters.add("ou");
-        filters.add("ROLE");
+        filters.add("objectclass");
+        filters.add("group");
         filters = ldapConnection.connectViaLdap(filters,ConvertType.GROUPS);
         if(filters != null) return new ResponseEntity<>(filters,HttpStatus.OK);
         else return ResponseEntity.badRequest().build();
