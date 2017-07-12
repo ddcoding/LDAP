@@ -43,20 +43,20 @@
                     </div>
                     <div class="form-bottom">
                         <form class="login-form" ng-switch="vm.isAuthenticate()">
-                            <div class="form-group" ng-switch-when="true">
+                            <div class="form-group" ng-switch-when="false">
                                 <label class="sr-only" for="form-username">Username</label>
-                                <input ng-model="vm.userName" type="text" name="form-username" placeholder="Username..."
+                                <input ng-model="vm.credentials.userName" type="text" name="form-username" placeholder="Username..."
                                        class="form-username form-control" id="form-username">
                             </div>
-                            <div class="form-group" ng-switch-when="true">
+                            <div class="form-group" ng-switch-when="false">
                                 <label class="sr-only" for="form-password">Password</label>
-                                <input ng-model="vm.password" type="password" name="form-password"
+                                <input ng-model="vm.credentials.password" type="password" name="form-password"
                                        placeholder="Password..." class="form-password form-control" id="form-password">
                             </div>
-                            <button ng-click="vm.logIn()" class="btn btn-primary" ng-switch-when="true">Sign in!</button>
-                            <div class="jumbotron" style="margin-top: 50px ">
+                            <button ng-click="vm.logIn()" class="btn btn-primary" ng-switch-when="false">Sign in!</button>
+                            <div class="jumbotron" style="margin-top: 50px " ng-switch-when="true">
                                 <h2><strong style="margin-right: 5px">Witaj!</strong>{{vm.fullname}}</h2>
-                                <a id="logout" style="margin-bottom: 5px" href="/logout" class="btn">Log out!</a>
+                                <button ng-click="vm.logOut()" id="logout" style="margin-bottom: 5px" class="btn">Log out!</button>
                                 <button ng-click="vm.isAuthenticate()" class="btn btn-success">Check connection!</button>
                             </div>
                         </form>

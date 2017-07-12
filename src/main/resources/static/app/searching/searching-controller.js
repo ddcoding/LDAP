@@ -15,6 +15,7 @@
             vm.values[vm.values.length++] = [];
         };
 
+        vm.getName();
 
         vm.getGroups = function () {
             GetGroupsLdap.query({}, onSuccessGroups, onErrorGroups)

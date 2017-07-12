@@ -1,4 +1,5 @@
 <div>
+    <h1 class="jumbotron">HELLO {{vm.fullname}}</h1>
     <button ng-click="vm.addFields()">Przycisk</button>
     <div id="room_fields"></div>
     <div ng-repeat="value in vm.values track by $index">

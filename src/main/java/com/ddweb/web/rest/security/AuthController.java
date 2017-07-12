@@ -36,25 +36,30 @@ public class AuthController {
 
     @GetMapping("/islogged")
     @ResponseBody
-    public String isLogged(){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        return "Zalogowano mnie!";
-    }
-
-    @GetMapping("/login/{userName}/{password}")
-    @ResponseBody
-    public ResponseEntity<List<String>> logIn(@PathVariable("userName") String userName, @PathVariable("password") String password){
-
-        if(ldapLogged.isLogged(userName, password)) {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(userName, null, AuthorityUtils.createAuthorityList("ROLE_USER"));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+    public ResponseEntity<List<String>> isLogged(){
+        if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated())
+        {
+            String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
             AndFilter andFilter = new AndFilter();
             String[] splitted = userName.split("@");
             andFilter.and(new EqualsFilter("sAMAccountName",splitted[0]));
             List<Object> joList = ldapLogged.getLdapTemplate().search("", andFilter.encode(), new ContactAttrJSON());
             List<String> stringList;
             stringList = ldapConnection.convert(joList, ConvertType.NAMES);
-            return new ResponseEntity<>(stringList, HttpStatus.OK);
+            return new ResponseEntity<>(stringList, HttpStatus.ACCEPTED);
+        }
+        else
+            return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/login/{userName}/{password}")
+    @ResponseBody
+    public ResponseEntity logIn(@PathVariable("userName") String userName, @PathVariable("password") String password){
+
+        if(ldapLogged.isLogged(userName, password)) {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(userName, null, AuthorityUtils.createAuthorityList("ROLE_USER"));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return ResponseEntity.ok().build();
         }
         else
             return ResponseEntity.badRequest().build();
@@ -64,11 +69,5 @@ public class AuthController {
     @ResponseBody
     public String logOutInfo(){
         return "wylogowano pomyslnie!";
-    }
-
-    @PostMapping("/authenticate")
-    @ResponseBody
-    public Principal login(Principal principal){
-        return principal;
     }
 }
