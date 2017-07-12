@@ -21,6 +21,11 @@ public class LdapLogged {
 
     private Environment env;
 
+    private LdapTemplate ldapTemplate;
+
+    public LdapTemplate getLdapTemplate() {
+        return ldapTemplate;
+    }
 
     public LdapTemplate getLdapTemplate(String userName, String password)
     {
@@ -30,7 +35,7 @@ public class LdapLogged {
         ctx.setUserDn(userName);
         ctx.setPassword(password);
         ctx.afterPropertiesSet();
-        LdapTemplate ldapTemplate = new LdapTemplate(ctx);
+        ldapTemplate = new LdapTemplate(ctx);
         ldapTemplate.setIgnorePartialResultException(true);
         return ldapTemplate;
     }
@@ -39,11 +44,10 @@ public class LdapLogged {
     public boolean isLogged(String userName, String password){
         LdapTemplate ldapTemplate = getLdapTemplate(userName, password);
         AndFilter andFilter = new AndFilter();
-            andFilter.and(new EqualsFilter("cn","Microsoft"));
+            andFilter.and(new EqualsFilter("objectClass","Person"));
         @SuppressWarnings("unchecked")
         List<Object> joList = ldapTemplate.search("", andFilter.encode(), new ContactAttrJSON());
-        if(!joList.isEmpty()) return true;
-        else return false;
+        return !joList.isEmpty();
     }
 
 }

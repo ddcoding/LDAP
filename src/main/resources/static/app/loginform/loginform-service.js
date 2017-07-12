@@ -8,7 +8,7 @@
     LoginFactory.$inject = ['$resource'];
 
     function LoginFactory ($resource) {
-        var resourceUrl =  'api/auth/login';
+        var resourceUrl =  'api/auth/login/:userName/:password';
 
         return $resource(resourceUrl);
     }

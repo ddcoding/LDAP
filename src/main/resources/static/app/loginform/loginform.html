@@ -1,14 +1,17 @@
 <!-- Modal content-->
-<div class="jumbotron">
+<div class="jumbotron" style="padding: 0 auto">
     <h2>Log in!</h2>
     <form>
         <label>Id</label>
-        <input type="text" ng-model="vm.user.id" title="Id">
+        <input type="text" ng-model="vm.userName" title="Id">
         <label>Password</label>
-        <input type="text" ng-model="vm.user.pw" title="Password">
-        <button ng-click="vm.logIn(vm.user)">Log In!</button>
+        <input type="password" ng-model="vm.password" title="Password">
+        <button ng-click="vm.logIn()">Log In!</button>
     </form>
     <!--<a href="/auth/login">Zaloguj mnie!</a></br>-->
     <!--<a href="/auth/islogged">Sprawdz czy jestem zalogowany</a>-->
 </div>
+{{vm.fullname}}
+<a href="/api/auth/islogged">check</a>
+<a href="/logout">Wyloguj</a>
 

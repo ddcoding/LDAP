@@ -8,10 +8,22 @@
 
     function LoginController(LoginFactory) {
         var vm = this;
-        vm.user = null;
-        vm.logIn = function (data) {
-            LoginFactory.save(data);
-        }
+        vm.fullname = "nazwisko";
+        vm.logIn = function () {
+            if(vm.userName!=null && vm.password!=null)
+            LoginFactory.query({
+                userName: vm.userName,
+                password: vm.password
+            }, onSuccess, onError);
+        };
+        vm.logIn();
+        var onSuccess = function (data) {
+            vm.fullname = data;
+        };
+        var onError = function () {
+            alert("nie pyklo");
+        };
+
 
     }
-    })();
+})();
