@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>LDAP</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="css/form-elements.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body ng-app="ldapApp">
 <script src="bower_components/angular/angular.js"></script>
@@ -11,6 +20,8 @@
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="js/jquery.backstretch.js"></script>
+<script src="js/scripts.js"></script>
 <script src="angular/app-module.js"></script>
 <script src="app/searching/searching-service.js"></script>
 <script src="app/searching/searching-groups-service.js"></script>
@@ -24,5 +35,8 @@
     <a ui-sref="login">Zacznij prace !</a>
     <div ui-view="content"></div>
 </div>
+<!--[if lt IE 10]>
+<script src="js/placeholder.js"></script>
+<![endif]-->
 </body>
 </html>

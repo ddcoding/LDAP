@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -63,5 +64,11 @@ public class AuthController {
     @ResponseBody
     public String logOutInfo(){
         return "wylogowano pomyslnie!";
+    }
+
+    @PostMapping("/authenticate")
+    @ResponseBody
+    public Principal login(Principal principal){
+        return principal;
     }
 }

@@ -8,7 +8,7 @@
 
     function LoginController(LoginFactory) {
         var vm = this;
-        vm.fullname = "nazwisko";
+        vm.fullname = null;
         vm.logIn = function () {
             if(vm.userName!=null && vm.password!=null)
             LoginFactory.query({
@@ -23,6 +23,10 @@
         var onError = function () {
             alert("nie pyklo");
         };
+        
+        vm.isAuthenticate = function () {
+            return vm.fullname==null;
+        }
 
 
     }

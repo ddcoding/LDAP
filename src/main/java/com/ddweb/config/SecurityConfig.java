@@ -11,14 +11,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .httpBasic()
+                .and()
                 .authorizeRequests()
 //                .antMatchers("/api").permitAll()
                 .antMatchers("/api/auth/islogged/**").authenticated()
                 .and()
-                .formLogin()
+                .formLogin().loginProcessingUrl("/api/auth/authenticate").permitAll()
         .and().logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/api/auth/logoutinfo")
+                .logoutSuccessUrl("/")
                 .permitAll()
                 .and().csrf().disable();
     }
