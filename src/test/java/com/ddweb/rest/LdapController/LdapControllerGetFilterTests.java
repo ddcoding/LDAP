@@ -1,10 +1,9 @@
 package com.ddweb.rest.LdapController;
 
-import com.ddweb.web.rest.LdapController;
+import com.ddweb.web.rest.ldap.LdapController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.luaj.vm2.ast.Str;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,21 +1,14 @@
-package com.ddweb.web.rest;
+package com.ddweb.web.rest.ldap;
 
-import com.ddweb.annotations.DevProfile;
 import com.ddweb.enums.ConvertType;
-import com.ddweb.model.LdapFilter;
-import com.ddweb.service.Interpreter;
-import com.ddweb.service.LdapConnection;
+import com.ddweb.service.ldap.Interpreter;
+import com.ddweb.service.ldap.LdapConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 

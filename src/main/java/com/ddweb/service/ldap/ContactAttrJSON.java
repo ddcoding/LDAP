@@ -1,4 +1,4 @@
-package com.ddweb.service;
+package com.ddweb.service.ldap;
 
 import org.json.JSONObject;
 import org.springframework.ldap.core.AttributesMapper;

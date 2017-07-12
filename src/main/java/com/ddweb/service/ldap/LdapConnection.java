@@ -1,26 +1,21 @@
-package com.ddweb.service;
+package com.ddweb.service.ldap;
 
 import com.ddweb.config.LdapConfig;
 import com.ddweb.enums.ConvertType;
-import com.ddweb.model.LdapFilter;
-import com.ddweb.service.ContactAttrJSON;
 import org.json.JSONObject;
-import org.luaj.vm2.ast.Str;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.filter.AndFilter;
 import org.springframework.ldap.filter.EqualsFilter;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Receiving data from LDAP data store
  */
 @Service
-public class LdapConnection {
+public class LdapConnection{
 
     /**
      * used for getting LdapTemplate

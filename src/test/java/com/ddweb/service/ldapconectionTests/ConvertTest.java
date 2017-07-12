@@ -3,8 +3,8 @@ package com.ddweb.service.ldapconectionTests;
 
 import com.ddweb.config.LdapConfig;
 import com.ddweb.enums.ConvertType;
-import com.ddweb.service.ContactAttrJSON;
-import com.ddweb.service.LdapConnection;
+import com.ddweb.service.ldap.ContactAttrJSON;
+import com.ddweb.service.ldap.LdapConnection;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
