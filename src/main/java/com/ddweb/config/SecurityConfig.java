@@ -13,9 +13,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .authorizeRequests()
 //                .antMatchers("/api").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/auth/islogged/**").authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+        .and().logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/auth/logoutinfo")
+                .permitAll()
+                .and().csrf().disable();
     }
 
 }
