@@ -1,5 +1,6 @@
 package com.ddweb.web.rest.security;
 
+import com.ddweb.model.User;
 import com.ddweb.service.ldap.LdapLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,9 +28,9 @@ public class AuthController {
 
     @PostMapping("/login")
     @ResponseBody
-    public String logIn(@RequestBody String userName, @RequestBody String password){
+    public String logIn(@RequestBody User user){
 
-        if(ldapLogged.isLogged(userName, password)) {
+        if(ldapLogged.isLogged(user.getUserName(), user.getPassword())) {
             Authentication authentication = new UsernamePasswordAuthenticationToken(null, null, AuthorityUtils.createAuthorityList("ROLE_USER"));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return "Zalogowano!";
