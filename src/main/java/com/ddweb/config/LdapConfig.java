@@ -10,6 +10,8 @@ import org.springframework.ldap.core.support.LdapContextSource;
 
 /**
  * Ldap configuration file
+ * setting Ldap context (Url/Ldap Base/Ldap UserDN/Ldap Password)
+ * creating Ldap Template
  */
 @Configuration
 public class LdapConfig {

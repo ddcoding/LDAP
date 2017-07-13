@@ -1,5 +1,8 @@
 package com.ddweb.model;
 
+/**
+ *  model used to convert user data from front
+ */
 public class User {
     private String userName;
     private String password;

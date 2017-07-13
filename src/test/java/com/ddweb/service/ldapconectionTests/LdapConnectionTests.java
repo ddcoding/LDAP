@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+import org.springframework.ldap.filter.AndFilter;
+import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -37,21 +39,9 @@ public class LdapConnectionTests {
      */
     @Test
     public void connectionResultsSuccess() {
-        List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("objectclass");
-        ldapFilters.add("person");
-        assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.NAMES)).isNotEmpty();
-    }
-    /**
-     * checking if custom entry is not empty with correct data and ConvertType is set to GROUPS
-     * @see ConvertType
-     */
-    @Test
-    public void connectionResultsSuccess2() {
-        List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("objectclass");
-        ldapFilters.add("group");
-        assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.GROUPS)).isNotEmpty();
+        AndFilter andFilter = new AndFilter();
+        andFilter.and(new EqualsFilter("sAMAccountName","jakdwo"));
+        assertThat(ldapConnection.connectViaLdap(ConvertType.NAMES,andFilter)).isNotEmpty();
     }
 
     /**
@@ -59,12 +49,22 @@ public class LdapConnectionTests {
      */
     @Test
     public void connectionResultsFailure() {
-        List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("sometext");
-        ldapFilters.add("Wrong");
-        assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.NAMES)).isEmpty();
+        AndFilter andFilter = new AndFilter();
+        andFilter.and(new EqualsFilter("sAMAccountName","niemamnie"));
+        assertThat(ldapConnection.connectViaLdap(ConvertType.NAMES,andFilter)).isEmpty();
     }
 
+//    /**
+//     * checking if custom entry is not empty with correct data and ConvertType is set to GROUPS
+//     * @see ConvertType
+//     */
+//    @Test
+//    public void connectionResultsSuccess2() {
+//        List<String> ldapFilters = new ArrayList<>();
+//        ldapFilters.add("objectclass");
+//        ldapFilters.add("group");
+//        assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.GROUPS)).isNotEmpty();
+//    }
     /**
      * checking if custom entry is null with null data
      */
@@ -72,27 +72,4 @@ public class LdapConnectionTests {
     public void connectionResultsNull() {
         assertThat(ldapConnection.connectViaLdap(null, null)).isNull();
     }
-
-    @Test
-    public void connectionResultsNull2() {
-        assertThat(ldapConnection.connectViaLdap(null, ConvertType.NAMES)).isNull();
-    }
-
-    @Test
-    public void connectionResultsNull3() {
-        List<String> ldapFilters = new ArrayList<>();
-        ldapFilters.add("ou");
-        ldapFilters.add(LdapConnectionTests.GROUP_ADMIN + "," + LdapConnectionTests.GROUP_SUPPORT + "," + env.getProperty("LdapBase"));
-        assertThat(ldapConnection.connectViaLdap(ldapFilters, null)).isNull();
-    }
-
-    /**
-     * checking if custom entry is empty with wrong data
-     */
-    @Test
-    public void connectionResultsEmpty() {
-        List<String> ldapFilters = new ArrayList<>();
-        assertThat(ldapConnection.connectViaLdap(ldapFilters, ConvertType.NAMES)).isNull();
-    }
-
 }

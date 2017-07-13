@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ *  Controller for all kind of authentication operations
+ */
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -40,6 +43,10 @@ public class AuthController {
         this.ldapImport = ldapImport;
     }
 
+    /**
+     *  <b>GET</b> request to get logged person <i>full name</i>
+     *  @return full name of current user
+     */
     @GetMapping("/login")
     @ResponseBody
     public ResponseEntity<List<String>> getName(){
@@ -49,8 +56,10 @@ public class AuthController {
             return ResponseEntity.status(401).build();
     }
 
+    /**
+     *  <b>POST</b> request to authenticate user's session
+     */
     @PostMapping("/login")
-    @ResponseBody
     public ResponseEntity logIn(@RequestBody User user){
         if(ldapLogged.isLogged(user.getUserName(), user.getPassword())) {
             Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUserName(), null, AuthorityUtils.createAuthorityList("ROLE_USER"));
@@ -61,6 +70,10 @@ public class AuthController {
             return ResponseEntity.status(401).build();
     }
 
+
+    /**
+     *  if authorization fails, the user will be redirected to login page
+     */
     @RequestMapping("/login/page")
     public void loginHandler(HttpServletResponse response) throws IOException {
         response.sendRedirect("/#/login");

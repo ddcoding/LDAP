@@ -5,14 +5,12 @@ import com.ddweb.enums.ConvertType;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ldap.filter.AndFilter;
-import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TEMP
  * Receiving data from LDAP data store
  */
 @Service
@@ -31,20 +29,13 @@ public class LdapConnection{
     /**
      * getting records from LDAP method
      *
-     * @param ldapFiltersList - list of attributes with values used for filtering LDAP data store
      * @return list of records
      */
-    public List<String> connectViaLdap(List<String> ldapFiltersList, ConvertType convertType) {
-        if (ldapFiltersList != null && !ldapFiltersList.isEmpty() && convertType != null) {
-            AndFilter andFilter = new AndFilter();
-            for (int i = 0; i < ldapFiltersList.size(); i += 2) {
-                andFilter.and(new EqualsFilter(ldapFiltersList.get(i), ldapFiltersList.get(i + 1)));
-            }
+    public List<String> connectViaLdap(ConvertType convertType, AndFilter andFilter) {
+        if (convertType != null) {
             @SuppressWarnings("unchecked")
             List<Object> joList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
-            List<String> stringList = convert(joList, convertType);
-            System.out.println(stringList.toString());
-            return stringList;
+            return convert(joList, convertType);
         } else return null;
     }
 
@@ -72,10 +63,11 @@ public class LdapConnection{
                 case GROUPS:
                     for (Object o : objectList)
                         try {
-                            stringList.add((String) ((JSONObject) o).get("ou"));
+                            stringList.add((String) ((JSONObject) o).get("memberOf"));
                         } catch (ClassCastException ignored) {
                             System.err.println("Got wrong list as param!");
                         }
+                        stringList.forEach(System.out::println);
                     break;
             }
             return stringList;

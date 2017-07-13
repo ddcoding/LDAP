@@ -13,28 +13,29 @@ import java.util.List;
 
 
 
+/**
+ *  Service, where gets from Ldap are defined
+ */
 @Service
 public class LdapImport {
-
-    private LdapConfig ldapLogged;
 
     private final LdapConnection ldapConnection;
 
     @Autowired
-    public LdapImport(LdapConfig ldapLogged, LdapConnection ldapConnection) {
-        this.ldapLogged = ldapLogged;
+    public LdapImport(LdapConnection ldapConnection) {
         this.ldapConnection = ldapConnection;
     }
 
+    /**
+     *  getting logged user name and surname
+     *  @return full name of user
+     */
     public List<String> getName(){
             String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
             AndFilter andFilter = new AndFilter();
             String[] splitted = userName.split("@");
             andFilter.and(new EqualsFilter("sAMAccountName",splitted[0]));
-            @SuppressWarnings("unchecked")
-            List<Object> joList = ldapLogged.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
-            List<String> stringList;
-            stringList = ldapConnection.convert(joList, ConvertType.NAMES);
-            return stringList;
+            ldapConnection.connectViaLdap(ConvertType.GROUPS,andFilter);
+            return ldapConnection.connectViaLdap(ConvertType.NAMES,andFilter);
     }
 }

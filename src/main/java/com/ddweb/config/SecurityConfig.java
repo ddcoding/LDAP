@@ -8,6 +8,10 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import java.lang.reflect.Method;
 
+/**
+ *  Main Configuration file for Security Options like disabling views for unauthorized users
+ *
+ */
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 

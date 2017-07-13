@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- *  Lua Configuration file
+ *  Lua Configuration file, main path and init
  */
 @Configuration
 public class LuaConfig {
