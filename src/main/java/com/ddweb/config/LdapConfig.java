@@ -44,7 +44,7 @@ public class LdapConfig {
     public LdapOperations getTemplate() {
         String url = env.getProperty("LdapUrl");
         String base = env.getProperty("LdapBase");
-        String userDn = env.getProperty("LdapUserDn");
+        String userDn = env.getProperty("LdapUserDn") + env.getProperty("LdapDomain");
         String password = env.getProperty("LdapPassword");
         LdapContextSource ctx = new LdapContextSource();
         ctx.setUrl(url);

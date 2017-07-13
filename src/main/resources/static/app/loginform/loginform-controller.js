@@ -38,7 +38,7 @@
             vm.getName();
         };
         var onError = function () {
-            alert("nie pyklo");
+            alert("Błędne dane logowania ! Spróbuj ponownie");
         };
 
         vm.isAuthenticate = function () {
