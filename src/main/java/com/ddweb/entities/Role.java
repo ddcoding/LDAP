@@ -1,11 +1,12 @@
 package com.ddweb.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "Role")
-public class Role {
+@Table(name = "role")
+public class Role implements Serializable {
     public static final long serialVersionUID = 1L;
 
     @Id
@@ -15,12 +16,12 @@ public class Role {
     @Column(name = "role_name")
     private String name;
     @Column(name = "role_authorizations")
-    private List<String> authorizations;
+    private String authorizations;
 
     public Role() {
     }
 
-    public Role(String name, List<String> authorizations) {
+    public Role(String name, String authorizations) {
         this.name = name;
         this.authorizations = authorizations;
     }
@@ -41,11 +42,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<String> getAuthorizations() {
+    public String getAuthorizations() {
         return authorizations;
     }
 
-    public void setAuthorizations(List<String> authorizations) {
+    public void setAuthorizations(String authorizations) {
         this.authorizations = authorizations;
     }
 
