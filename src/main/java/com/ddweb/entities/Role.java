@@ -15,15 +15,15 @@ public class Role implements Serializable {
     private Long id;
     @Column(name = "role_name")
     private String name;
-    @Column(name = "role_authorizations")
-    private String authorizations;
+    @Column(name = "role_description")
+    private String description;
 
     public Role() {
     }
 
-    public Role(String name, String authorizations) {
+    public Role(String name, String description) {
         this.name = name;
-        this.authorizations = authorizations;
+        this.description = description;
     }
 
     public Long getId() {
@@ -42,12 +42,12 @@ public class Role implements Serializable {
         this.name = name;
     }
 
-    public String getAuthorizations() {
-        return authorizations;
+    public String getDescription() {
+        return description;
     }
 
-    public void setAuthorizations(String authorizations) {
-        this.authorizations = authorizations;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class Role implements Serializable {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", authorizations=" + authorizations +
+                ", description=" + description +
                 '}';
     }
 }
