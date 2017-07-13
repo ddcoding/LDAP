@@ -52,7 +52,6 @@ public class AuthController {
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity logIn(@RequestBody User user){
-
         if(ldapLogged.isLogged(user.getUserName(), user.getPassword())) {
             Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUserName(), null, AuthorityUtils.createAuthorityList("ROLE_USER"));
             SecurityContextHolder.getContext().setAuthentication(authentication);
