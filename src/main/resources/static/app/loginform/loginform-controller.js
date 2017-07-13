@@ -9,7 +9,6 @@
     function LoginController(LoginFactory, $rootScope,$location,NameService,LogoutFactory) {
         var vm = this;
         vm.credentials = {};
-        vm.fullname = null;
         vm.fullname = "BRAK!";
         vm.logIn = function () {
             if(vm.credentials.userName!=null && vm.credentials.password!=null) {

@@ -17,6 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
 //                .antMatchers("/api").permitAll()
                 .antMatchers("/api/auth/islogged/**").authenticated()
+                .antMatchers("/home").authenticated()
                 .and()
                 .formLogin().loginProcessingUrl("/api/auth/authenticate").permitAll()
         .and().logout()

@@ -1,5 +1,6 @@
 package com.ddweb.web.rest.security;
 
+import com.ddweb.config.LdapConfig;
 import com.ddweb.enums.ConvertType;
 import com.ddweb.model.User;
 import com.ddweb.service.ldap.ContactAttrJSON;
@@ -24,12 +25,15 @@ import java.util.List;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private LdapConfig ldapConfig;
+
     private LdapLogged ldapLogged;
 
     private final LdapConnection ldapConnection;
 
     @Autowired
-    public AuthController(LdapLogged ldapLogged, LdapConnection ldapConnection) {
+    public AuthController(LdapConfig ldapConfig, LdapConnection ldapConnection, LdapLogged ldapLogged) {
+        this.ldapConfig = ldapConfig;
         this.ldapLogged = ldapLogged;
         this.ldapConnection = ldapConnection;
     }
@@ -37,13 +41,14 @@ public class AuthController {
     @GetMapping("/islogged")
     @ResponseBody
     public ResponseEntity<List<String>> isLogged(){
-        if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated())
+        System.err.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null)
         {
             String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
             AndFilter andFilter = new AndFilter();
             String[] splitted = userName.split("@");
             andFilter.and(new EqualsFilter("sAMAccountName",splitted[0]));
-            List<Object> joList = ldapLogged.getLdapTemplate().search("", andFilter.encode(), new ContactAttrJSON());
+            List<Object> joList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
             List<String> stringList;
             stringList = ldapConnection.convert(joList, ConvertType.NAMES);
             return new ResponseEntity<>(stringList, HttpStatus.ACCEPTED);
