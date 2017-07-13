@@ -1,5 +1,9 @@
 package com.ddweb.structures;
 
+/**
+ * TEMP
+ *
+ * */
 public class Pair<K,L> {
     private K k;
     private L l;

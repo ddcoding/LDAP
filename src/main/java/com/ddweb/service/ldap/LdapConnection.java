@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TEMP
  * Receiving data from LDAP data store
  */
 @Service

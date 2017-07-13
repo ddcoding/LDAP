@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * TEMP
  * Interpreter class for replace values from client side to pair which contains key,value. It's necessary to communicate with LDAP repository
  */
 @Service

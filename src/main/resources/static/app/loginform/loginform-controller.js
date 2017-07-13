@@ -4,18 +4,18 @@
         .module('ldapApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['LoginFactory','$rootScope','$location','NameService','LogoutFactory'];
+    LoginController.$inject = ['LoginFactory','$rootScope','$location','LogoutFactory'];
 
-    function LoginController(LoginFactory, $rootScope,$location,NameService,LogoutFactory) {
+    function LoginController(LoginFactory, $rootScope,$location,LogoutFactory) {
         var vm = this;
-        vm.credentials = {};
+        vm.user = {};
         vm.fullname = "BRAK!";
         vm.logIn = function () {
-            if(vm.credentials.userName!=null && vm.credentials.password!=null) {
-                LoginFactory.query({
-                    userName: vm.credentials.userName,
-                    password: vm.credentials.password
-                }, onSuccess, onError);
+            if(vm.user.userName!=null && vm.user.password!=null) {
+                LoginFactory.save({
+                    userName: vm.user.userName,
+                    password: vm.user.password
+                }, onSuccessLogIn, onErrorLogIn);
             }
         };
 
@@ -32,29 +32,34 @@
             alert(status);
         };
 
-        var onSuccess = function () {
+        var onSuccessLogIn = function () {
             $rootScope.authenticate = true;
             vm.getName();
         };
-        var onError = function () {
+        var onErrorLogIn = function () {
             alert("Błędne dane logowania ! Spróbuj ponownie");
         };
 
         vm.isAuthenticate = function () {
-            return $rootScope.authenticate ;
+            return $rootScope.authenticate
+        };
+
+        vm.checkAuthenticate = function () {
+            if($rootScope.authenticate) alert("Połączenie nawiązane");
+            else alert("Połączenie nieudane");
         };
 
 
         vm.getName = function () {
-            NameService.query({},onSucc,onErr);
+            LoginFactory.query({},onGetNameSuccess,onGetNameError);
         };
 
-        function onSucc(data) {
+        function onGetNameSuccess(data) {
             $rootScope.authenticate = true;
             vm.fullname = data;
         }
 
-        function onErr(status)
+        function onGetNameError(status)
         {
             $rootScope.authenticate = false;
         }

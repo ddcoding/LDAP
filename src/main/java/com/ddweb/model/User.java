@@ -1,8 +1,5 @@
 package com.ddweb.model;
 
-/**
- * Created by kardro on 12.07.2017.
- */
 public class User {
     private String userName;
     private String password;

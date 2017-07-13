@@ -1,12 +1,15 @@
 package com.ddweb.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import java.lang.reflect.Method;
+
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Override
@@ -14,17 +17,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http
                 .httpBasic()
                 .and()
-                .authorizeRequests()
-//                .antMatchers("/api").permitAll()
-                .antMatchers("/api/auth/islogged/**").authenticated()
-                .antMatchers("/home").authenticated()
+                    .formLogin()
+                    .loginProcessingUrl("/api/auth/authenticate")
+                    .loginPage("/api/auth/login/page")
+                    .permitAll()
                 .and()
-                .formLogin().loginProcessingUrl("/api/auth/authenticate").permitAll()
-        .and().logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
-                .permitAll()
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                    .logout()
+                    .logoutUrl("/logout")
+                    .logoutSuccessUrl("/")
+                    .permitAll()
+                .and()
+                    .csrf()
+                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
+                    .authorizeRequests()
+                    .antMatchers(HttpMethod.GET,"/api/auth/login/**")
+                    .authenticated();
     }
 
 }

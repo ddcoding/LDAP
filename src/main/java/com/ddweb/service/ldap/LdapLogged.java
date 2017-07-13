@@ -25,10 +25,6 @@ public class LdapLogged {
 
     private LdapTemplate ldapTemplate;
 
-    public LdapTemplate getLdapTemplate() {
-        return ldapTemplate;
-    }
-
     public LdapTemplate getLdapTemplate(String userName, String password) {
         LdapContextSource ctx = new LdapContextSource();
         ctx.setUrl(env.getProperty("LdapUrl"));

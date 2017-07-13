@@ -1,20 +1,11 @@
 package com.ddweb.config;
 
-import com.ddweb.annotations.DevProfile;
-import com.ddweb.annotations.ProdProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.ldap.core.LdapOperations;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.core.support.LdapContextSource;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 
 /**
@@ -27,14 +18,10 @@ public class LdapConfig {
      */
     private final Environment env;
 
-    private final AuthenticationManager authenticationManager;
-
     @Autowired
-    public LdapConfig(Environment env, AuthenticationManager authenticationManager) {
+    public LdapConfig(Environment env) {
         this.env = env;
-        this.authenticationManager = authenticationManager;
     }
-
 
     /**
      * Setting LDAP context
@@ -54,7 +41,6 @@ public class LdapConfig {
         ctx.afterPropertiesSet();
         LdapTemplate ldapTemplate = new LdapTemplate(ctx);
         ldapTemplate.setIgnorePartialResultException(true);
-        System.out.print("logging");
         return ldapTemplate;
     }
 }

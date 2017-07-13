@@ -5,6 +5,7 @@ import com.ddweb.enums.ConvertType;
 import com.ddweb.model.User;
 import com.ddweb.service.ldap.ContactAttrJSON;
 import com.ddweb.service.ldap.LdapConnection;
+import com.ddweb.service.ldap.LdapImport;
 import com.ddweb.service.ldap.LdapLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -25,54 +28,42 @@ import java.util.List;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    private LdapConfig ldapConfig;
 
     private LdapLogged ldapLogged;
 
-    private final LdapConnection ldapConnection;
+
+    private final LdapImport ldapImport;
 
     @Autowired
-    public AuthController(LdapConfig ldapConfig, LdapConnection ldapConnection, LdapLogged ldapLogged) {
-        this.ldapConfig = ldapConfig;
+    public AuthController(LdapLogged ldapLogged, LdapImport ldapImport) {
         this.ldapLogged = ldapLogged;
-        this.ldapConnection = ldapConnection;
+        this.ldapImport = ldapImport;
     }
 
-    @GetMapping("/islogged")
+    @GetMapping("/login")
     @ResponseBody
-    public ResponseEntity<List<String>> isLogged(){
-        System.err.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    public ResponseEntity<List<String>> getName(){
         if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null)
-        {
-            String userName = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-            AndFilter andFilter = new AndFilter();
-            String[] splitted = userName.split("@");
-            andFilter.and(new EqualsFilter("sAMAccountName",splitted[0]));
-            List<Object> joList = ldapConfig.getTemplate().search("", andFilter.encode(), new ContactAttrJSON());
-            List<String> stringList;
-            stringList = ldapConnection.convert(joList, ConvertType.NAMES);
-            return new ResponseEntity<>(stringList, HttpStatus.ACCEPTED);
-        }
+            return new ResponseEntity<>(ldapImport.getName(), HttpStatus.ACCEPTED);
         else
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(401).build();
     }
 
-    @GetMapping("/login/{userName}/{password}")
+    @PostMapping("/login")
     @ResponseBody
-    public ResponseEntity logIn(@PathVariable("userName") String userName, @PathVariable("password") String password){
+    public ResponseEntity logIn(@RequestBody User user){
 
-        if(ldapLogged.isLogged(userName, password)) {
-            Authentication authentication = new UsernamePasswordAuthenticationToken(userName, null, AuthorityUtils.createAuthorityList("ROLE_USER"));
+        if(ldapLogged.isLogged(user.getUserName(), user.getPassword())) {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUserName(), null, AuthorityUtils.createAuthorityList("ROLE_USER"));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return ResponseEntity.ok().build();
         }
         else
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.status(401).build();
     }
 
-    @GetMapping("/logoutinfo")
-    @ResponseBody
-    public String logOutInfo(){
-        return "wylogowano pomyslnie!";
+    @RequestMapping("/login/page")
+    public void loginHandler(HttpServletResponse response) throws IOException {
+        response.sendRedirect("/#/login");
     }
 }
