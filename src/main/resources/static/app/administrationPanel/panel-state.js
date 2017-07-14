@@ -13,6 +13,7 @@
                 parent: 'app',
                 url: '/administration',
                 data: {
+                    authorities: ['ROLE_USER']
                     // pageTitle: 'jhipsterSampleApplicationApp.operation.home.title'
                 },
                 views: {

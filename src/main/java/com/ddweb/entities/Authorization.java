@@ -24,7 +24,7 @@ public class Authorization implements Serializable {
     @Column(name = "auth_description")
     private String descirption;
 
-    @ManyToMany
+    @ManyToMany(targetEntity=Role.class ,cascade = CascadeType.ALL)
     @Column(name = "roles_excluded")
     @JoinTable(name = "role",
             joinColumns = {@JoinColumn(name = "excluded_auth_id", referencedColumnName = "auth_id")},
