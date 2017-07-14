@@ -55,7 +55,7 @@ public class Authorization implements Serializable {
                 ", name='" + name + '\'' +
                 ", rolesExcluded='" + rolesExcluded + '\'' +
                 ", rolesIncluded='" + rolesIncluded + '\'' +
-                ", descirption='" + descirption + '\'' +
+                ", description='" + descirption + '\'' +
                 '}';
     }
 
