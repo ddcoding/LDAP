@@ -43,6 +43,7 @@ public class ApplicationUser implements Serializable{
     public ApplicationUser() {
     }
 
+
     public ApplicationUser(String branch, String name, String login, String surname, String position, List<Role> roles, List<UserGroup> userGroups) {
         this.branch = branch;
         this.name = name;
