@@ -50,6 +50,7 @@ public class Role implements Serializable {
     public Role() {
     }
 
+
     public Role(String name, String description, Role role, List<Authorization> includedAuthorizations, List<Authorization> excludedAuthorizations, List<UserGroup> userGroups, List<ApplicationUser> users) {
         this.name = name;
         this.description = description;
