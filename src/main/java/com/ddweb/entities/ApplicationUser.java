@@ -1,7 +1,11 @@
 package com.ddweb.entities;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "user_entity")
@@ -15,27 +19,54 @@ public class ApplicationUser implements Serializable{
 
     @Column(name = "branch")
     private String branch;
-    @Column(name = "password")
-    private String password;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "login")
     private String login;
+
     @Column(name = "surname")
     private String surname;
+
     @Column(name = "position")
     private String position;
+
+    @ManyToMany(targetEntity=Role.class, fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    @Column(name = "roles")
+    private List<Role> roles;
+
+    @ManyToMany(targetEntity=UserGroup.class, fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    @Column(name = "user_groups")
+    private List<UserGroup> userGroups;
 
     public ApplicationUser() {
     }
 
-    public ApplicationUser(String branch, String password, String name, String login, String surname, String position) {
+    public ApplicationUser(String branch, String name, String login, String surname, String position, List<Role> roles, List<UserGroup> userGroups) {
         this.branch = branch;
-        this.password = password;
         this.name = name;
         this.login = login;
         this.surname = surname;
         this.position = position;
+        this.roles = roles;
+        this.userGroups = userGroups;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
+    public List<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public void setUserGroups(List<UserGroup> userGroups) {
+        this.userGroups = userGroups;
     }
 
     public Long getId() {
@@ -52,14 +83,6 @@ public class ApplicationUser implements Serializable{
 
     public void setBranch(String branch) {
         this.branch = branch;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -99,11 +122,12 @@ public class ApplicationUser implements Serializable{
         return "ApplicationUser{" +
                 "id=" + id +
                 ", branch='" + branch + '\'' +
-                ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", login='" + login + '\'' +
                 ", surname='" + surname + '\'' +
                 ", position='" + position + '\'' +
+                ", roles=" + roles +
+                ", userGroups=" + userGroups +
                 '}';
     }
 }

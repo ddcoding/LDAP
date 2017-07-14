@@ -1,7 +1,10 @@
 package com.ddweb.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "group_entity")
@@ -19,12 +22,25 @@ public class UserGroup implements Serializable {
     @Column(name = "user_description")
     private String description;
 
+    @ManyToMany(targetEntity=Role.class ,fetch=FetchType.EAGER,cascade = CascadeType.ALL)
+    @Column(name = "roles")
+    private List<Role> roles;
+
     public UserGroup() {
     }
 
-    public UserGroup(String name, String description) {
+    public UserGroup(String name, String description, List<Role> roles) {
         this.name = name;
         this.description = description;
+        this.roles = roles;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     public String getName() {
