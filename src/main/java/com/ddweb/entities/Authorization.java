@@ -26,13 +26,16 @@ public class Authorization implements Serializable {
 
     @ManyToMany
     @Column(name = "roles_excluded")
+    @JoinTable(name = "role",
+            joinColumns = {@JoinColumn(name = "excluded_auth_id", referencedColumnName = "auth_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private List<Role> rolesExcluded;
 
-    @ManyToMany
-    @JoinTable(name = "authorizations_entity_roles_excluded",
-            joinColumns = {@JoinColumn(name = "included_authorizations_auth_id", referencedColumnName = "auth_id")},
-            inverseJoinColumns = {@JoinColumn(name = "roles_include_role_id",referencedColumnName = "role_id")})
+    @ManyToMany(targetEntity=Role.class ,cascade = CascadeType.ALL)
     @Column(name = "roles_included")
+    @JoinTable(name = "role",
+            joinColumns = {@JoinColumn(name = "included_auth_id", referencedColumnName = "auth_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private List<Role> rolesIncluded;
 
     public Authorization() {

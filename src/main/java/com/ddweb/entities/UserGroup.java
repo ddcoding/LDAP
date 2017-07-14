@@ -22,6 +22,10 @@ public class UserGroup implements Serializable {
     @Column(name = "user_description")
     private String description;
 
+    @JoinTable(name = "role",
+            joinColumns = {@JoinColumn(name = "user_groups", referencedColumnName = "user_group_id")},
+            inverseJoinColumns = {@JoinColumn(name = "roles",referencedColumnName = "role_id")})
+    @JoinColumn(name = "roles",referencedColumnName = "role_id")
     @ManyToMany(targetEntity=Role.class ,fetch=FetchType.EAGER,cascade = CascadeType.ALL)
     @Column(name = "roles")
     private List<Role> roles;

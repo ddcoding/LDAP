@@ -27,9 +27,9 @@ public class Role implements Serializable {
     @Column(name = "parent_role")
     private Role role;
 
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(targetEntity=Authorization.class, mappedBy = "rolesIncluded" ,cascade = CascadeType.ALL)
     @Column(name = "included_authorizations")
+    @ManyToMany(targetEntity=Authorization.class, mappedBy = "rolesIncluded",cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Authorization> includedAuthorizations;
 
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -38,7 +38,7 @@ public class Role implements Serializable {
     private List<Authorization> excludedAuthorizations;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(targetEntity=UserGroup.class,cascade = CascadeType.ALL)
+    @ManyToMany(targetEntity=UserGroup.class, mappedBy = "roles",cascade = CascadeType.ALL)
     @Column(name = "user_groups")
     private List<UserGroup> userGroups;
 
