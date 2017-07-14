@@ -1,0 +1,9 @@
+<div class="jumbotron" style="margin-top: 50px " ng-switch="vm.isAuthenticate()">
+<div ng-switch-when="true">
+<button ng-click="vm.logOut()" id="logout" style="margin-bottom: 5px" class="btn">
+    Log out!
+</button>
+</div>
+<button ng-click="vm.checkAuthenticate()" class="btn btn-success">Check connection!
+</button>
+</div>

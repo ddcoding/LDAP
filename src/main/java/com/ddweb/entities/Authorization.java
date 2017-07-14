@@ -1,10 +1,13 @@
 package com.ddweb.entities;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "authorization")
+@Table(name = "authorization_entity")
 public class Authorization implements Serializable {
     public static final long serialVersionUID = 1L;
 

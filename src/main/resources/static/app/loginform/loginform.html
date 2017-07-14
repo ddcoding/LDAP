@@ -23,7 +23,12 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form class="login-form" ng-switch="vm.isAuthenticate()">
+                        <div class="login-form" ng-switch="vm.isAuthenticate()">
+                            <!--Po zalogowaniu-->
+                            <div class="jumbotron" ng-switch-when="true">
+                                ZOSTALES ZALOGOWANY !
+                            </div>
+                            <!--Przez zalogowaniem-->
                             <div class="form-group" ng-switch-when="false">
                                 <label class="sr-only" for="form-username">Username</label>
                                 <input ng-model="vm.user.userName" type="text" name="form-username"
@@ -37,17 +42,7 @@
                             </div>
                             <button ng-click="vm.logIn()" class="btn btn-primary" ng-switch-when="false">Sign in!
                             </button>
-                            <div class="jumbotron" style="margin-top: 50px ">
-                                <div ng-switch-when="true">
-                                    <h2 style="font-size: 30px"><strong style="margin-right: 5px">Witaj!</strong>{{vm.fullname[0]}}</h2>
-                                    <button ng-click="vm.logOut()" id="logout" style="margin-bottom: 5px" class="btn">
-                                        Log out!
-                                    </button>
-                                </div>
-                                <button ng-click="vm.checkAuthenticate()" class="btn btn-success">Check connection!
-                                </button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -4,12 +4,13 @@
         .module('ldapApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['LoginFactory','$rootScope','$location','LogoutFactory'];
+    LoginController.$inject = ['LoginFactory','$rootScope','$location','$state','Auth'];
 
-    function LoginController(LoginFactory, $rootScope,$location,LogoutFactory) {
+    function LoginController(LoginFactory, $rootScope,$location,$state,Auth) {
         var vm = this;
         vm.user = {};
         vm.fullname = "BRAK!";
+        Auth.authorize();
         vm.logIn = function () {
             if(vm.user.userName!=null && vm.user.password!=null) {
                 LoginFactory.save({
@@ -19,22 +20,11 @@
             }
         };
 
-        vm.logOut = function () {
-            LogoutFactory.save({},onSuccLogOut,onErrLogOut);
-        };
-
-        var onSuccLogOut = function () {
-        $rootScope.authenticate = false;
-        vm.fullname = "BRAK";
-        };
-
-        var onErrLogOut = function (status) {
-            alert(status);
-        };
 
         var onSuccessLogIn = function () {
             $rootScope.authenticate = true;
-            vm.getName();
+            $state.go('panel');
+            // $location.state("panel");
         };
         var onErrorLogIn = function () {
             alert("Błędne dane logowania ! Spróbuj ponownie");
@@ -43,30 +33,5 @@
         vm.isAuthenticate = function () {
             return $rootScope.authenticate
         };
-
-        vm.checkAuthenticate = function () {
-            if($rootScope.authenticate) alert("Połączenie nawiązane");
-            else alert("Połączenie nieudane");
-        };
-
-
-        vm.getName = function () {
-            LoginFactory.query({},onGetNameSuccess,onGetNameError);
-        };
-
-        function onGetNameSuccess(data) {
-            $rootScope.authenticate = true;
-            vm.fullname = data;
-        }
-
-        function onGetNameError(status)
-        {
-            $rootScope.authenticate = false;
-        }
-
-        vm.getName();
-
-
-
     }
 })();

@@ -43,6 +43,15 @@ public class AuthController {
         this.ldapImport = ldapImport;
     }
 
+    @GetMapping("/check")
+    public ResponseEntity getAuth()
+    {
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser")
+        return new ResponseEntity(HttpStatus.OK);
+        else
+            return ResponseEntity.status(401).build();
+    }
+
     /**
      *  <b>GET</b> request to get logged person <i>full name</i>
      *  @return full name of current user
