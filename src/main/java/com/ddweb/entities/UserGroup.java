@@ -32,10 +32,9 @@ public class UserGroup implements Serializable {
     public UserGroup() {
     }
 
-    public UserGroup(String name, String description, List<Role> roles) {
+    public UserGroup(String name, String description) {
         this.name = name;
         this.description = description;
-        this.roles = roles;
     }
 
     public List<Role> getRoles() {

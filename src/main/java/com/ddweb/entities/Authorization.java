@@ -45,12 +45,9 @@ public class Authorization implements Serializable {
     public Authorization() {
     }
 
-    public Authorization(String name, String descirption, List<Role> rolesExcluded, List<Role> rolesIncluded, List<Role> roles) {
+    public Authorization(String name, String descirption) {
         this.name = name;
         this.descirption = descirption;
-        this.rolesExcluded = rolesExcluded;
-        this.rolesIncluded = rolesIncluded;
-        this.roles = roles;
     }
 
     public List<Role> getRoles() {
