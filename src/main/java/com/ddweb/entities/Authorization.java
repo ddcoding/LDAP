@@ -26,28 +26,40 @@ public class Authorization implements Serializable {
 
     @ManyToMany(targetEntity=Role.class ,cascade = CascadeType.ALL)
     @Column(name = "roles_excluded")
-    @JoinTable(name = "role",
-            joinColumns = {@JoinColumn(name = "excluded_auth_id", referencedColumnName = "auth_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
+//    @JoinTable(name = "role",
+//            joinColumns = {@JoinColumn(name = "excluded_auth_id", referencedColumnName = "auth_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private List<Role> rolesExcluded;
 
     @ManyToMany(targetEntity=Role.class ,cascade = CascadeType.ALL)
     @Column(name = "roles_included")
-    @JoinTable(name = "role",
-            joinColumns = {@JoinColumn(name = "included_auth_id", referencedColumnName = "auth_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
+//    @JoinTable(name = "role",
+//            joinColumns = {@JoinColumn(name = "included_auth_id", referencedColumnName = "auth_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "role_id",referencedColumnName = "role_id")})
     private List<Role> rolesIncluded;
+
+    @ManyToMany(targetEntity=Role.class ,cascade = CascadeType.ALL)
+    @Column(name = "roles")
+    private List<Role> roles;
 
     public Authorization() {
     }
 
-    public Authorization(String name, String descirption,List<Role> rolesExcluded, List<Role> rolesIncluded) {
+    public Authorization(String name, String descirption, List<Role> rolesExcluded, List<Role> rolesIncluded, List<Role> roles) {
         this.name = name;
         this.descirption = descirption;
-        this.rolesExcluded=rolesExcluded;
-        this.rolesIncluded=rolesIncluded;
+        this.rolesExcluded = rolesExcluded;
+        this.rolesIncluded = rolesIncluded;
+        this.roles = roles;
     }
 
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
     @Override
     public String toString() {

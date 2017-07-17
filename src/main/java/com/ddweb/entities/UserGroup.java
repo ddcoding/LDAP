@@ -22,12 +22,11 @@ public class UserGroup implements Serializable {
     @Column(name = "user_description")
     private String description;
 
-    @JoinTable(name = "role",
-            joinColumns = {@JoinColumn(name = "user_groups", referencedColumnName = "user_group_id")},
-            inverseJoinColumns = {@JoinColumn(name = "roles",referencedColumnName = "role_id")})
-    @JoinColumn(name = "roles",referencedColumnName = "role_id")
-    @ManyToMany(targetEntity=Role.class ,fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-    @Column(name = "roles")
+    @ManyToMany(targetEntity=Role.class ,cascade = CascadeType.ALL)
+//    @JoinTable(name = "group_entity_roles",
+//            joinColumns = {@JoinColumn(name = "user_groups_user_group_id", referencedColumnName = "user_group_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "roles_role_id",referencedColumnName = "role_id")})
+//    @Column(name = "roles")
     private List<Role> roles;
 
     public UserGroup() {

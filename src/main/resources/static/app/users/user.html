@@ -1,0 +1,18 @@
+<div ng-if="vm.isAuthenticated()">
+    <button class="menuButton col-xs-12" ui-sref="panel">Return</button>
+    <h2 style="color: #0f0f0f">Users:</h2>
+    <div class="jumbotron">
+        <div ng-repeat="user in vm.users">
+        <span>{{user.name}}
+            <!--zrobic przekazywanie obiektu zamiast imienia w user-controller.js-->
+            <button ng-click="vm.delete(user)" style="margin-bottom: 10px; margin-left: 30px"
+                    class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+            <button ui-sref="user-detail({id:user.id})"
+                    style="margin-bottom: 10px; margin-left: 5px; background-color: #2e6da4"
+                    class="btn btn-primary"> <span class="glyphicon glyphicon-pencil"></span></button></span>
+             <!--ui-sref="user - show more"-->
+            <button style="margin-bottom: 10px; margin-left: 5px; background-color: #4cae4c"
+                    class="btn btn-primary"> <span class="glyphicon glyphicon-list-alt"></span></button></span>
+        </div>
+    </div>
+</div>

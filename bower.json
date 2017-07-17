@@ -19,6 +19,7 @@
     "gulp": "^3.9.1",
     "angular-ui-router": "^1.0.5",
     "angular-resource": "^1.6.5",
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "angular-bootstrap": "^2.5.0"
   }
 }

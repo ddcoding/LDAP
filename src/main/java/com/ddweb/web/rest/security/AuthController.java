@@ -1,27 +1,23 @@
 package com.ddweb.web.rest.security;
 
-import com.ddweb.config.LdapConfig;
-import com.ddweb.enums.ConvertType;
+import com.ddweb.entities.Authorization;
 import com.ddweb.model.User;
-import com.ddweb.service.ldap.ContactAttrJSON;
-import com.ddweb.service.ldap.LdapConnection;
+import com.ddweb.repositories.AuthorizationRepository;
 import com.ddweb.service.ldap.LdapImport;
 import com.ddweb.service.ldap.LdapLogged;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ldap.filter.AndFilter;
-import org.springframework.ldap.filter.EqualsFilter;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.authority.GrantedAuthoritiesContainer;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,6 +33,7 @@ public class AuthController {
 
     private final LdapImport ldapImport;
 
+
     @Autowired
     public AuthController(LdapLogged ldapLogged, LdapImport ldapImport) {
         this.ldapLogged = ldapLogged;
@@ -44,11 +41,14 @@ public class AuthController {
     }
 
     @GetMapping("/check")
+//    @ResponseBody
     public ResponseEntity getAuth()
     {
-        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser")
-        return new ResponseEntity(HttpStatus.OK);
-        else
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != "anonymousUser" ) {
+            //przydaloby sie zrzutowac to authorities
+//            List<String> authorizations = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+            return new ResponseEntity(HttpStatus.OK);
+        }else
             return ResponseEntity.status(401).build();
     }
 
@@ -59,6 +59,7 @@ public class AuthController {
     @GetMapping("/login")
     @ResponseBody
     public ResponseEntity<List<String>> getName(){
+        System.err.print(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         if(SecurityContextHolder.getContext().getAuthentication().getPrincipal() != null)
             return new ResponseEntity<>(ldapImport.getName(), HttpStatus.ACCEPTED);
         else
@@ -71,6 +72,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity logIn(@RequestBody User user){
         if(ldapLogged.isLogged(user.getUserName(), user.getPassword())) {
+            //nie moge wbic tu listy atrybutow sprobuje pozniej
+//            List<Authorization> list = authorizationRepository.getAllAuthorizations("ROLE_USER");
+//            List<String> namedList = new ArrayList<>();
+//            for(Authorization a:list) namedList.add(a.getName());
             Authentication authentication = new UsernamePasswordAuthenticationToken(user.getUserName(), null, AuthorityUtils.createAuthorityList("ROLE_USER"));
             SecurityContextHolder.getContext().setAuthentication(authentication);
             return ResponseEntity.ok().build();

@@ -20,6 +20,7 @@
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 <script src="js/jquery.backstretch.js"></script>
 <script src="js/scripts.js"></script>
 <script src="angular/app-module.js"></script>
@@ -36,10 +37,19 @@
 <script src="app/administrationPanel/panel-controller.js"></script>
 <script src="app/administrationPanel/panel-state.js"></script>
 <script src="app/auth/auth-service.js"></script>
-<div>
-    <a ui-sref="login">Start Working!</a>
-    <div ui-view="content"></div>
+<script src="app/roles/role-controller.js"></script>
+<script src="app/roles/role-service.js"></script>
+<script src="app/roles/role-state.js"></script>
+<script src="app/roles/add-controller.js"></script>
+<script src="app/roles/role-detail-controller.js"></script>
+<script src="app/users/user-add-controller.js"></script>
+<script src="app/users/user-controller.js"></script>
+<script src="app/users/user-service.js"></script>
+<script src="app/users/user-state.js"></script>
+<script src="app/users/user-detail-controller.js"></script>
     <div ui-view="navbar"></div>
+<div>
+    <div ui-view="content"></div>
 </div>
 <!--[if lt IE 10]>
 <script src="js/placeholder.js"></script>

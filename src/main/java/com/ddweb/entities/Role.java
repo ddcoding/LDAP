@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +39,11 @@ public class Role implements Serializable {
     private List<Authorization> excludedAuthorizations;
 
     @LazyCollection(LazyCollectionOption.FALSE)
+    @ManyToMany(targetEntity=Authorization.class,cascade = CascadeType.ALL)
+    @Column(name = "authorities")
+    private List<Authorization> authorizations = new ArrayList<>();
+
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(targetEntity=UserGroup.class, mappedBy = "roles",cascade = CascadeType.ALL)
     @Column(name = "user_groups")
     private List<UserGroup> userGroups;
@@ -50,15 +56,23 @@ public class Role implements Serializable {
     public Role() {
     }
 
-
-    public Role(String name, String description, Role role, List<Authorization> includedAuthorizations, List<Authorization> excludedAuthorizations, List<UserGroup> userGroups, List<ApplicationUser> users) {
+    public Role(String name, String description, Role role, List<Authorization> includedAuthorizations, List<Authorization> excludedAuthorizations, List<Authorization> authorizations, List<UserGroup> userGroups, List<ApplicationUser> users) {
         this.name = name;
         this.description = description;
         this.role = role;
         this.includedAuthorizations = includedAuthorizations;
         this.excludedAuthorizations = excludedAuthorizations;
+        this.authorizations = authorizations;
         this.userGroups = userGroups;
         this.users = users;
+    }
+
+    public List<Authorization> getAuthorizations() {
+        return authorizations;
+    }
+
+    public void setAuthorizations(List<Authorization> authorizations) {
+        this.authorizations = authorizations;
     }
 
     public List<UserGroup> getUserGroups() {

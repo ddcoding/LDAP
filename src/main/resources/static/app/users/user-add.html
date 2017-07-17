@@ -1,0 +1,23 @@
+<button class="menuButton col-xs-12" ui-sref="panel">Return</button>
+<div class="row" ng-if="vm.isAuthenticated()">
+    <div class="col-sm-6 col-sm-offset-3 form-box">
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3>Add user</h3>
+                <p>Enter user data and submit:</p>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <div class="login-form">
+                <div class="form-group">
+                    <label class="sr-only" for="form-name">Name</label>
+                    <input ng-model="vm.role.name" type="text" name="form-name"
+                           placeholder="Name..."
+                           class="form-control" id="form-name">
+                </div>
+                RESZTA INPUTOW
+                <button ng-click="vm.save()" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>

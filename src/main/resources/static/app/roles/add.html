@@ -1,0 +1,32 @@
+<button class="menuButton col-xs-12" ui-sref="panel">Return</button>
+<div class="row" ng-if="vm.isAuthenticated()">
+    <div class="col-sm-6 col-sm-offset-3 form-box">
+        <div class="form-top">
+            <div class="form-top-left">
+                <h3>Add role</h3>
+                <p>Enter role data and submit:</p>
+            </div>
+        </div>
+        <div class="form-bottom">
+            <div class="login-form">
+                <div class="form-group">
+                    <label class="sr-only" for="form-name">Username</label>
+                    <input ng-model="vm.role.name" type="text" name="form-name"
+                           placeholder="Name..."
+                           class="form-control" id="form-name">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="form-description">Password</label>
+                    <input ng-model="vm.role.description" type="text" name="form-description"
+                           placeholder="Description..." class="form-control" id="form-description">
+                </div>
+                <div ng-controller="RoleController as vm">
+                    <select style="width: 100%; margin-bottom: 15px; height: 50px;">
+                        <option ng-repeat="role in vm.roles" value="{{AddController.values}}">{{role.name}}</option>
+                    </select>
+                </div>
+                <button ng-click="vm.save()" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
