@@ -24,8 +24,7 @@
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-<script src="bower_components/jquery.are-you-sure/jquery.are-you-sure.js"></script>
-<script src="bower_components/jquery.are-you-sure/ays-beforeunload-shim.js"></script>
+<script src="bower_components/angular-unsavedChanges/dist/unsavedChanges.min.js"></script>
 
 <script src="content/js/scripts.js"></script>
 
@@ -99,11 +98,6 @@
 <script src="app/users/user-service.js"></script>
 <script src="app/users/user-state.js"></script>
 <script src="app/users/user-detail-controller.js"></script>
-<script>
-    $(function () {
-        $('#search1').areYouSure();
-    })
-</script>
     <div ui-view="navbar"></div>
 <div>
     <div ui-view="content"></div>

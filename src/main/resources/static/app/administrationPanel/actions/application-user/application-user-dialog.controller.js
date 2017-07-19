@@ -20,6 +20,30 @@
             angular.element('.form-group:eq(1)>input').focus();
         });
 
+        $scope.$on('modal.closing', function(event, reason, closed) {
+            // console.log('modal.closing: ' + (closed ? 'close' : 'dismiss') + '(' + reason + ')');
+            // var message = "You are about to leave the edit view. Uncaught reason. Are you sure?";
+            // switch (reason){
+            //     // clicked outside
+            //     case "backdrop click":
+            //         message = "Any changes will be lost, are you sure?";
+            //         break;
+            //
+            //     // cancel button
+            //     case "cancel":
+            //         message = "Any changes will be lost, are you sure?";
+            //         break;
+            //
+            //     // escape key
+            //     case "escape key press":
+            //         message = "Any changes will be lost, are you sure?";
+            //         break;
+            // }
+            // if (!confirm(message)) {
+                event.preventDefault();
+            // }
+        });
+
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }

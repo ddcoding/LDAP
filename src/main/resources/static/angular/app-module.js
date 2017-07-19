@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('ldapApp', ['ui.router','ngResource','ui.bootstrap']).run(run);
+        .module('ldapApp', ['ui.router','ngResource','ui.bootstrap','unsavedChanges']).run(run);
 
     run.$inject = [];
 function run() {

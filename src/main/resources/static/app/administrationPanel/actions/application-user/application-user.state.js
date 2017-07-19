@@ -5,9 +5,9 @@
         .module('ldapApp')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider'];
+    stateConfig.$inject = ['$stateProvider','unsavedWarningsConfigProvider'];
 
-    function stateConfig($stateProvider) {
+    function stateConfig($stateProvider,unsavedWarningsConfigProvider) {
         $stateProvider
         .state('application-user', {
             parent: 'entity',
@@ -181,6 +181,9 @@
                 });
             }]
         });
+
+        unsavedWarningsConfigProvider.navigateMessage="Masz niezapisane zmiany w formularzu, czy na pewno chcesz opuścić stronę?";
+        unsavedWarningsConfigProvider.routeEvent='$locationChangeStart';
     }
 
 })();
