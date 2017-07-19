@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('AuthorizationController', AuthorizationController);
 
-    AuthorizationController.$inject = ['$state', 'Authorization', 'AuthorizationSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    AuthorizationController.$inject = ['$state', 'Authorization', 'AuthorizationSearch', 'ParseLinks', 'paginationConstants', 'pagingParams'];
 
-    function AuthorizationController($state, Authorization, AuthorizationSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function AuthorizationController($state, Authorization, AuthorizationSearch, ParseLinks, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -54,7 +54,7 @@
                 vm.page = pagingParams.page;
             }
             function onError(error) {
-                AlertService.error(error.data.message);
+                console.log(error.data.message);
             }
         }
 

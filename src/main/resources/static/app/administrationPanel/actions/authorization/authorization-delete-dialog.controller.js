@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('AuthorizationDeleteController',AuthorizationDeleteController);
 
     AuthorizationDeleteController.$inject = ['$uibModalInstance', 'entity', 'Authorization'];

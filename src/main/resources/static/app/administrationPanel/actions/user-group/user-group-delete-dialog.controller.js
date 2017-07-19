@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('UserGroupDeleteController',UserGroupDeleteController);
 
     UserGroupDeleteController.$inject = ['$uibModalInstance', 'entity', 'UserGroup'];

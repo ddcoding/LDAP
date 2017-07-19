@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -13,12 +13,12 @@
             parent: 'entity',
             url: '/user-group?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'robimytov2App.userGroup.home.title'
+                // authorities: ['ROLE_USER'],
+                pageTitle: 'panel'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/user-group/user-groups.html',
+                    templateUrl: 'app/administrationPanel/action/user-group/user-groups.html',
                     controller: 'UserGroupController',
                     controllerAs: 'vm'
                 }
@@ -43,11 +43,6 @@
                         ascending: PaginationUtil.parseAscending($stateParams.sort),
                         search: $stateParams.search
                     };
-                }],
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('userGroup');
-                    $translatePartialLoader.addPart('global');
-                    return $translate.refresh();
                 }]
             }
         })
@@ -55,21 +50,17 @@
             parent: 'user-group',
             url: '/user-group/{id}',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'robimytov2App.userGroup.detail.title'
+                // authorities: ['ROLE_USER'],
+                pageTitle: 'user group'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/user-group/user-group-detail.html',
+                    templateUrl: 'app/administrationPanel/action/user-group/user-group-detail.html',
                     controller: 'UserGroupDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('userGroup');
-                    return $translate.refresh();
-                }],
                 entity: ['$stateParams', 'UserGroup', function($stateParams, UserGroup) {
                     return UserGroup.get({id : $stateParams.id}).$promise;
                 }],
@@ -83,15 +74,15 @@
                 }]
             }
         })
-        .state('user-group-detail.edit', {
+        .state('user-group-detail-edit', {
             parent: 'user-group-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/user-group/user-group-dialog.html',
+                    templateUrl: 'app/administrationPanel/action/user-group/user-group-dialog.html',
                     controller: 'UserGroupDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -108,15 +99,15 @@
                 });
             }]
         })
-        .state('user-group.new', {
+        .state('user-group-new', {
             parent: 'user-group',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/user-group/user-group-dialog.html',
+                    templateUrl: 'app/administrationPanel/action/user-group/user-group-dialog.html',
                     controller: 'UserGroupDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -137,15 +128,15 @@
                 });
             }]
         })
-        .state('user-group.edit', {
+        .state('user-group-edit', {
             parent: 'user-group',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/user-group/user-group-dialog.html',
+                    templateUrl: 'app/administrationPanel/action/user-group/user-group-dialog.html',
                     controller: 'UserGroupDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -162,15 +153,15 @@
                 });
             }]
         })
-        .state('user-group.delete', {
+        .state('user-group-delete', {
             parent: 'user-group',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/user-group/user-group-delete-dialog.html',
+                    templateUrl: 'app/administrationPanel/action/user-group/user-group-delete-dialog.html',
                     controller: 'UserGroupDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

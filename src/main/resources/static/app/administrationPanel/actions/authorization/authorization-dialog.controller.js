@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('AuthorizationDialogController', AuthorizationDialogController);
 
     AuthorizationDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Authorization', 'Role'];
@@ -33,7 +33,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('robimytov2App:authorizationUpdate', result);
+            $scope.$emit('ldapApp:authorizationUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

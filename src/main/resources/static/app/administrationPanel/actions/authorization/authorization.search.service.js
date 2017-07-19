@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .factory('AuthorizationSearch', AuthorizationSearch);
 
     AuthorizationSearch.$inject = ['$resource'];

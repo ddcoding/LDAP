@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -13,12 +13,12 @@
             parent: 'entity',
             url: '/authorization?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'robimytov2App.authorization.home.title'
+                // authorities: ['ROLE_USER'],
+                pageTitle: 'panel'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/authorization/authorizations.html',
+                    templateUrl: 'app/administrationPanel/actions/authorization/authorizations.html',
                     controller: 'AuthorizationController',
                     controllerAs: 'vm'
                 }
@@ -43,11 +43,6 @@
                         ascending: PaginationUtil.parseAscending($stateParams.sort),
                         search: $stateParams.search
                     };
-                }],
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('authorization');
-                    $translatePartialLoader.addPart('global');
-                    return $translate.refresh();
                 }]
             }
         })
@@ -55,8 +50,8 @@
             parent: 'authorization',
             url: '/authorization/{id}',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'robimytov2App.authorization.detail.title'
+                // authorities: ['ROLE_USER'],
+                pageTitle: 'authorizations'
             },
             views: {
                 'content@': {
@@ -66,10 +61,6 @@
                 }
             },
             resolve: {
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('authorization');
-                    return $translate.refresh();
-                }],
                 entity: ['$stateParams', 'Authorization', function($stateParams, Authorization) {
                     return Authorization.get({id : $stateParams.id}).$promise;
                 }],
@@ -83,15 +74,15 @@
                 }]
             }
         })
-        .state('authorization-detail.edit', {
+        .state('authorization-detail-edit', {
             parent: 'authorization-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/authorization/authorization-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/authorization/authorization-dialog.html',
                     controller: 'AuthorizationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -108,15 +99,15 @@
                 });
             }]
         })
-        .state('authorization.new', {
+        .state('authorization-new', {
             parent: 'authorization',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/authorization/authorization-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/authorization/authorization-dialog.html',
                     controller: 'AuthorizationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -137,15 +128,15 @@
                 });
             }]
         })
-        .state('authorization.edit', {
+        .state('authorization-edit', {
             parent: 'authorization',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/authorization/authorization-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/authorization/authorization-dialog.html',
                     controller: 'AuthorizationDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -162,15 +153,15 @@
                 });
             }]
         })
-        .state('authorization.delete', {
+        .state('authorization-delete', {
             parent: 'authorization',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
+                // authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/authorization/authorization-delete-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/authorization/authorization-delete-dialog.html',
                     controller: 'AuthorizationDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

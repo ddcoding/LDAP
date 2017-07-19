@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('UserGroupDialogController', UserGroupDialogController);
 
     UserGroupDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'UserGroup', 'Role', 'ApplicationUser'];
@@ -34,7 +34,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('robimytov2App:userGroupUpdate', result);
+            $scope.$emit('ldapApp:userGroupUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

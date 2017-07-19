@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .factory('Authorization', Authorization);
 
     Authorization.$inject = ['$resource'];
