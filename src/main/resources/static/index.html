@@ -5,9 +5,9 @@
     <title>LDAP</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link rel="stylesheet" href="css/form-elements.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="content/css/form-elements.css">
+    <link rel="stylesheet" href="content/css/style.css">
+    <link rel="stylesheet" href="content/css/font-awesome.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -16,15 +16,18 @@
 </head>
 <body ng-app="ldapApp">
 
-<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="content/js/jquery.backstretch.js"></script>
+
+<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/jquery.are-you-sure/jquery.are-you-sure.js"></script>
+<script src="bower_components/jquery.are-you-sure/ays-beforeunload-shim.js"></script>
 
-<script src="js/jquery.backstretch.js"></script>
-<script src="js/scripts.js"></script>
+<script src="content/js/scripts.js"></script>
 
 <script src="angular/app-module.js"></script>
 
@@ -38,29 +41,29 @@
 
 <script src="app/components/form/pagination.constants.js"></script>
 
-<!--<script src="app/administrationPanel/actions/user-group/user-group-detail.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/user-group/user-group-delete-dialog.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/user-group/user-group.state.js"></script>-->
-<!--<script src="app/administrationPanel/actions/user-group/user-group.service.js"></script>-->
-<!--<script src="app/administrationPanel/actions/user-group/user-group.search.service.js"></script>-->
-<!--<script src="app/administrationPanel/actions/user-group/user-group.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/user-group/user-group-dialog.controller.js"></script>-->
+<script src="app/administrationPanel/actions/user-group/user-group-detail.controller.js"></script>
+<script src="app/administrationPanel/actions/user-group/user-group-delete-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/user-group/user-group.state.js"></script>
+<script src="app/administrationPanel/actions/user-group/user-group.service.js"></script>
+<script src="app/administrationPanel/actions/user-group/user-group.search.service.js"></script>
+<script src="app/administrationPanel/actions/user-group/user-group.controller.js"></script>
+<script src="app/administrationPanel/actions/user-group/user-group-dialog.controller.js"></script>
 
-<!--<script src="app/administrationPanel/actions/role/role-dialog.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/role/role-detail.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/role/role-delete-dialog.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/role/role.state.js"></script>-->
-<!--<script src="app/administrationPanel/actions/role/role.service.js"></script>-->
-<!--<script src="app/administrationPanel/actions/role/role.search.service.js"></script>-->
-<!--<script src="app/administrationPanel/actions/role/role.controller.js"></script>-->
+<script src="app/administrationPanel/actions/role/role-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/role/role-detail.controller.js"></script>
+<script src="app/administrationPanel/actions/role/role-delete-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/role/role.state.js"></script>
+<script src="app/administrationPanel/actions/role/role.service.js"></script>
+<script src="app/administrationPanel/actions/role/role.search.service.js"></script>
+<script src="app/administrationPanel/actions/role/role.controller.js"></script>
 
-<!--<script src="app/administrationPanel/actions/authorization/authorization-dialog.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/authorization/authorization-detail.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/authorization/authorization-delete-dialog.controller.js"></script>-->
-<!--<script src="app/administrationPanel/actions/authorization/authorization.state.js"></script>-->
-<!--<script src="app/administrationPanel/actions/authorization/authorization.service.js"></script>-->
-<!--<script src="app/administrationPanel/actions/authorization/authorization.search.service.js"></script>-->
-<!--<script src="app/administrationPanel/actions/authorization/authorization.controller.js"></script>-->
+<script src="app/administrationPanel/actions/authorization/authorization-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/authorization/authorization-detail.controller.js"></script>
+<script src="app/administrationPanel/actions/authorization/authorization-delete-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/authorization/authorization.state.js"></script>
+<script src="app/administrationPanel/actions/authorization/authorization.service.js"></script>
+<script src="app/administrationPanel/actions/authorization/authorization.search.service.js"></script>
+<script src="app/administrationPanel/actions/authorization/authorization.controller.js"></script>
 
 <script src="app/administrationPanel/actions/application-user/application-user-dialog.controller.js"></script>
 <script src="app/administrationPanel/actions/application-user/application-user-detail.controller.js"></script>
@@ -86,22 +89,27 @@
 <script src="app/administrationPanel/panel-controller.js"></script>
 <script src="app/administrationPanel/panel-state.js"></script>
 <script src="app/auth/auth-service.js"></script>
-<script src="app/roles/role-controller.js"></script>
-<script src="app/roles/role-service.js"></script>
-<script src="app/roles/role-state.js"></script>
-<script src="app/roles/add-controller.js"></script>
-<script src="app/roles/role-detail-controller.js"></script>
+<!--<script src="app/roles/role-controller.js"></script>-->
+<!--<script src="app/roles/role-service.js"></script>-->
+<!--<script src="app/roles/role-state.js"></script>-->
+<!--<script src="app/roles/add-controller.js"></script>-->
+<!--<script src="app/roles/role-detail-controller.js"></script>-->
 <script src="app/users/user-add-controller.js"></script>
 <script src="app/users/user-controller.js"></script>
 <script src="app/users/user-service.js"></script>
 <script src="app/users/user-state.js"></script>
 <script src="app/users/user-detail-controller.js"></script>
+<script>
+    $(function () {
+        $('#search1').areYouSure();
+    })
+</script>
     <div ui-view="navbar"></div>
 <div>
     <div ui-view="content"></div>
 </div>
 <!--[if lt IE 10]>
-<script src="js/placeholder.js"></script>
+<script src="content/js/placeholder.js"></script>
 <![endif]-->
 </body>
 </html>

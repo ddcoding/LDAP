@@ -5,9 +5,10 @@
         .module('ldapApp')
         .controller('RoleDetailController', RoleDetailController);
 
-    RoleDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Role', 'Authorization', 'ApplicationUser', 'UserGroup'];
+    RoleDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Role', 'Authorization', 'ApplicationUser', 'UserGroup','Auth'];
 
-    function RoleDetailController($scope, $rootScope, $stateParams, previousState, entity, Role, Authorization, ApplicationUser, UserGroup) {
+    function RoleDetailController($scope, $rootScope, $stateParams, previousState, entity, Role, Authorization, ApplicationUser, UserGroup,Auth) {
+        Auth.authorize();
         var vm = this;
 
         vm.role = entity;

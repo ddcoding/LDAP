@@ -5,9 +5,10 @@
         .module('ldapApp')
         .controller('UserGroupDetailController', UserGroupDetailController);
 
-    UserGroupDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UserGroup', 'Role', 'ApplicationUser'];
+    UserGroupDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'UserGroup', 'Role', 'ApplicationUser','Auth'];
 
-    function UserGroupDetailController($scope, $rootScope, $stateParams, previousState, entity, UserGroup, Role, ApplicationUser) {
+    function UserGroupDetailController($scope, $rootScope, $stateParams, previousState, entity, UserGroup, Role, ApplicationUser,Auth) {
+        Auth.authorize();
         var vm = this;
 
         vm.userGroup = entity;

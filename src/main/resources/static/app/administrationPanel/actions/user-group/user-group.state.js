@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/administrationPanel/action/user-group/user-groups.html',
+                    templateUrl: 'app/administrationPanel/actions/user-group/user-groups.html',
                     controller: 'UserGroupController',
                     controllerAs: 'vm'
                 }
@@ -55,7 +55,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/administrationPanel/action/user-group/user-group-detail.html',
+                    templateUrl: 'app/administrationPanel/actions/user-group/user-group-detail.html',
                     controller: 'UserGroupDetailController',
                     controllerAs: 'vm'
                 }
@@ -82,7 +82,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/action/user-group/user-group-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/user-group/user-group-dialog.html',
                     controller: 'UserGroupDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -107,7 +107,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/action/user-group/user-group-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/user-group/user-group-dialog.html',
                     controller: 'UserGroupDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -136,7 +136,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/action/user-group/user-group-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/user-group/user-group-dialog.html',
                     controller: 'UserGroupDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -161,7 +161,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/action/user-group/user-group-delete-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/user-group/user-group-delete-dialog.html',
                     controller: 'UserGroupDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

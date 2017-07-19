@@ -17,7 +17,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/administrationPanel/role/roles.html',
+                    templateUrl: 'app/administrationPanel/actions/role/roles.html',
                     controller: 'RoleController',
                     controllerAs: 'vm'
                 }
@@ -53,7 +53,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/administrationPanel/role/role-detail.html',
+                    templateUrl: 'app/administrationPanel/actions/role/role-detail.html',
                     controller: 'RoleDetailController',
                     controllerAs: 'vm'
                 }
@@ -79,7 +79,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/role/role-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/role/role-dialog.html',
                     controller: 'RoleDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -103,7 +103,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/role/role-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/role/role-dialog.html',
                     controller: 'RoleDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -131,7 +131,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/role/role-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/role/role-dialog.html',
                     controller: 'RoleDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -155,7 +155,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/administrationPanel/role/role-delete-dialog.html',
+                    templateUrl: 'app/administrationPanel/actions/role/role-delete-dialog.html',
                     controller: 'RoleDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
