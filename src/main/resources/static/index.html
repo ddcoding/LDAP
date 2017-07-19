@@ -15,14 +15,63 @@
     <![endif]-->
 </head>
 <body ng-app="ldapApp">
+
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+
 <script src="js/jquery.backstretch.js"></script>
 <script src="js/scripts.js"></script>
+
 <script src="angular/app-module.js"></script>
+
+<script src="app/administrationPanel/entity.state.js"></script>
+
+<script src="app/components/util/pagination-util.service.js"></script>
+<script src="app/components/util/parse-links.service.js"></script>
+<script src="app/components/util/sort-by.directive.js"></script>
+<script src="app/components/util/sort.directive.js"></script>
+<script src="app/components/util/jhi-item-count.directive.js"></script>
+
+<script src="app/components/form/pagination.constants.js"></script>
+
+<!--<script src="app/administrationPanel/actions/user-group/user-group-detail.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/user-group/user-group-delete-dialog.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/user-group/user-group.state.js"></script>-->
+<!--<script src="app/administrationPanel/actions/user-group/user-group.service.js"></script>-->
+<!--<script src="app/administrationPanel/actions/user-group/user-group.search.service.js"></script>-->
+<!--<script src="app/administrationPanel/actions/user-group/user-group.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/user-group/user-group-dialog.controller.js"></script>-->
+
+<!--<script src="app/administrationPanel/actions/role/role-dialog.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/role/role-detail.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/role/role-delete-dialog.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/role/role.state.js"></script>-->
+<!--<script src="app/administrationPanel/actions/role/role.service.js"></script>-->
+<!--<script src="app/administrationPanel/actions/role/role.search.service.js"></script>-->
+<!--<script src="app/administrationPanel/actions/role/role.controller.js"></script>-->
+
+<!--<script src="app/administrationPanel/actions/authorization/authorization-dialog.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/authorization/authorization-detail.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/authorization/authorization-delete-dialog.controller.js"></script>-->
+<!--<script src="app/administrationPanel/actions/authorization/authorization.state.js"></script>-->
+<!--<script src="app/administrationPanel/actions/authorization/authorization.service.js"></script>-->
+<!--<script src="app/administrationPanel/actions/authorization/authorization.search.service.js"></script>-->
+<!--<script src="app/administrationPanel/actions/authorization/authorization.controller.js"></script>-->
+
+<script src="app/administrationPanel/actions/application-user/application-user-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/application-user/application-user-detail.controller.js"></script>
+<script src="app/administrationPanel/actions/application-user/application-user-delete-dialog.controller.js"></script>
+<script src="app/administrationPanel/actions/application-user/application-user.state.js"></script>
+<script src="app/administrationPanel/actions/application-user/application-user.service.js"></script>
+<script src="app/administrationPanel/actions/application-user/application-user.search.service.js"></script>
+<script src="app/administrationPanel/actions/application-user/application-user.controller.js"></script>
+
+
+
 <script src="app/searching/searching-service.js"></script>
 <script src="app/searching/searching-groups-service.js"></script>
 <script src="angular/app-state.js"></script>

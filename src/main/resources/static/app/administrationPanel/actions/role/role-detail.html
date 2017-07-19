@@ -1,0 +1,63 @@
+
+<div>
+    <h2><span data-translate="robimytov2App.role.detail.title">Role</span> {{vm.role.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="robimytov2App.role.name">Name</span></dt>
+        <dd>
+            <span>{{vm.role.name}}</span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.description">Description</span></dt>
+        <dd>
+            <span>{{vm.role.description}}</span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.includedAuthorization">Included Authorization</span></dt>
+        <dd>
+            <span ng-repeat="includedAuthorization in vm.role.includedAuthorizations">
+                <a ui-sref="authorization-detail({id: includedAuthorization.id})">{{includedAuthorization.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.excludedAuthorization">Excluded Authorization</span></dt>
+        <dd>
+            <span ng-repeat="excludedAuthorization in vm.role.excludedAuthorizations">
+                <a ui-sref="authorization-detail({id: excludedAuthorization.id})">{{excludedAuthorization.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.actualRole">Actual Role</span></dt>
+        <dd>
+            <span ng-repeat="actualRole in vm.role.actualRoles">
+                <a ui-sref="authorization-detail({id: actualRole.id})">{{actualRole.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.parentRole">Parent Role</span></dt>
+        <dd>
+            <span ng-repeat="parentRole in vm.role.parentRoles">
+                <a ui-sref="role-detail({id: parentRole.id})">{{parentRole.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.users">Users</span></dt>
+        <dd>
+            <span ng-repeat="users in vm.role.users">
+                <a ui-sref="application-user-detail({id: users.id})">{{users.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span data-translate="robimytov2App.role.userGroups">User Groups</span></dt>
+        <dd>
+            <span ng-repeat="userGroups in vm.role.userGroups">
+                <a ui-sref="user-group-detail({id: userGroups.id})">{{userGroups.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="role-detail.edit({id:vm.role.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

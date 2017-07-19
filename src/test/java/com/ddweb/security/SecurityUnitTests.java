@@ -1,7 +1,6 @@
 package com.ddweb.security;
 
 import com.ddweb.model.User;
-import com.ddweb.rest.LdapController.LdapControllerGetFilterTests;
 import com.ddweb.service.ldap.LdapImport;
 import com.ddweb.utils.TestUtil;
 import com.ddweb.web.rest.security.AuthController;

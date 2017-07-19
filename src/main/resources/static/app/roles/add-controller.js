@@ -21,6 +21,19 @@
         };
         var onSaveError = function () {
             console.log("błąd");
-        }
+        };
+        vm.roles =[];
+        vm.getAllRoles = function(){
+            vm.roles = RoleFactory.query({},successGetAll,errorGetAll);
+        };
+        vm.getAllRoles();
+        var successGetAll = function (data) {
+            for(var i = 0; i< data.length; i++){
+                vm.roles = [data.name];
+            }
+        };
+        var errorGetAll = function () {
+            alert("nie udalo sie pobrac")
+        };
     }
 })();

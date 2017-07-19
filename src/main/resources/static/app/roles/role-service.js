@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,10 +7,13 @@
 
     RoleFactory.$inject = ['$resource'];
 
-    function RoleFactory ($resource) {
-        var resourceUrl =  'api/roles/:roleParam:id';
+    function RoleFactory($resource) {
+        var resourceUrl = 'api/roles/:roleParam:id';
 
-        return $resource(resourceUrl,{},
-            {'update': { method:'PUT' }});
+        return $resource(resourceUrl, {},
+            {
+                'update': {method: 'PUT'},
+                'save': {method: 'PUT'}
+            });
     }
 })();

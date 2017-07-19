@@ -16,13 +16,13 @@
                            class="form-control" id="form-name">
                 </div>
                 <div class="form-group">
-                    <label class="sr-only" for="form-description">Password</label>
+                    <label class="sr-only" for="form-description">Description</label>
                     <input ng-model="vm.role.description" type="text" name="form-description"
                            placeholder="Description..." class="form-control" id="form-description">
                 </div>
-                <div ng-controller="RoleController as vm">
+                <div>
                     <select style="width: 100%; margin-bottom: 15px; height: 50px;">
-                        <option ng-repeat="role in vm.roles" value="{{AddController.values}}">{{role.name}}</option>
+                        <option ng-repeat="role in vm.roles track by $index" value="{{AddController.values[$index]}}">{{role.name}}</option>
                     </select>
                 </div>
                 <button ng-click="vm.save()" class="btn btn-primary">Add</button>

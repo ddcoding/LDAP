@@ -1,8 +1,6 @@
 package com.ddweb.web.rest.security;
 
-import com.ddweb.entities.Authorization;
 import com.ddweb.model.User;
-import com.ddweb.repositories.AuthorizationRepository;
 import com.ddweb.service.ldap.LdapImport;
 import com.ddweb.service.ldap.LdapLogged;
 import org.springframework.beans.factory.annotation.Autowired;

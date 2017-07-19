@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -7,10 +7,13 @@
 
     UserFactory.$inject = ['$resource'];
 
-    function UserFactory ($resource) {
-        var resourceUrl =  'api/users/:userParam:id';
+    function UserFactory($resource) {
+        var resourceUrl = 'api/users/:userParam:id';
 
-        return $resource(resourceUrl,{},
-            {'update': { method:'PUT' }});
+        return $resource(resourceUrl, {},
+            {
+                'update': {method: 'PUT'},
+                'save': {method: 'PUT'}
+            });
     }
 })();

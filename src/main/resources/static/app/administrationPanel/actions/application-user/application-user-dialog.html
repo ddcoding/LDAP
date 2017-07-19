@@ -1,0 +1,101 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myApplicationUserLabel">Create or edit a Application User</h4>
+    </div>
+    <div class="modal-body">
+        <div class="form-group" ng-show="vm.applicationUser.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.applicationUser.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_branch">Branch</label>
+            <input type="text" class="form-control" name="branch" id="field_branch"
+                    ng-model="vm.applicationUser.branch"
+                    required/>
+            <div ng-show="editForm.branch.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.branch.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.applicationUser.name"
+                    required/>
+            <div ng-show="editForm.name.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.name.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_login">Login</label>
+            <input type="text" class="form-control" name="login" id="field_login"
+                    ng-model="vm.applicationUser.login"
+                    required/>
+            <div ng-show="editForm.login.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.login.$error.required" >
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_surname">Surname</label>
+            <input type="text" class="form-control" name="surname" id="field_surname"
+                    ng-model="vm.applicationUser.surname"
+                    required/>
+            <div ng-show="editForm.surname.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.surname.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_position">Position</label>
+            <input type="text" class="form-control" name="position" id="field_position"
+                    ng-model="vm.applicationUser.position"
+                    required/>
+            <div ng-show="editForm.position.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.position.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                    ng-model="vm.applicationUser.email"
+                    required/>
+            <div ng-show="editForm.email.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.email.$error.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="field_userGroups">User Groups</label>
+            <select class="form-control" id="field_userGroups" multiple name="userGroups" ng-model="vm.applicationUser.userGroups" ng-options="userGroup as userGroup.id for userGroup in vm.usergroups track by userGroup.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

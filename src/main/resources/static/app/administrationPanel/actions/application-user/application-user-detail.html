@@ -1,0 +1,48 @@
+
+<div>
+    <h2><span>Application User</span> {{vm.applicationUser.id}}</h2>
+    <hr>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Branch</span></dt>
+        <dd>
+            <span>{{vm.applicationUser.branch}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{vm.applicationUser.name}}</span>
+        </dd>
+        <dt><span>Login</span></dt>
+        <dd>
+            <span>{{vm.applicationUser.login}}</span>
+        </dd>
+        <dt><span>Surname</span></dt>
+        <dd>
+            <span>{{vm.applicationUser.surname}}</span>
+        </dd>
+        <dt><span>Position</span></dt>
+        <dd>
+            <span>{{vm.applicationUser.position}}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+            <span>{{vm.applicationUser.email}}</span>
+        </dd>
+        <dt><span>User Groups</span></dt>
+        <dd>
+            <span ng-repeat="userGroups in vm.applicationUser.userGroups">
+                <a ui-sref="user-group-detail({id: userGroups.id})">{{userGroups.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="application-user-detail.edit({id:vm.applicationUser.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>
