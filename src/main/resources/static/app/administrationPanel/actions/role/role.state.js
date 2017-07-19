@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -13,12 +13,11 @@
             parent: 'entity',
             url: '/role?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'robimytov2App.role.home.title'
+                pageTitle: 'panel'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/role/roles.html',
+                    templateUrl: 'app/administrationPanel/role/roles.html',
                     controller: 'RoleController',
                     controllerAs: 'vm'
                 }
@@ -43,11 +42,6 @@
                         ascending: PaginationUtil.parseAscending($stateParams.sort),
                         search: $stateParams.search
                     };
-                }],
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('role');
-                    $translatePartialLoader.addPart('global');
-                    return $translate.refresh();
                 }]
             }
         })
@@ -55,21 +49,16 @@
             parent: 'role',
             url: '/role/{id}',
             data: {
-                authorities: ['ROLE_USER'],
-                pageTitle: 'robimytov2App.role.detail.title'
+                pageTitle: 'role'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/role/role-detail.html',
+                    templateUrl: 'app/administrationPanel/role/role-detail.html',
                     controller: 'RoleDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
-                translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('role');
-                    return $translate.refresh();
-                }],
                 entity: ['$stateParams', 'Role', function($stateParams, Role) {
                     return Role.get({id : $stateParams.id}).$promise;
                 }],
@@ -83,15 +72,14 @@
                 }]
             }
         })
-        .state('role-detail.edit', {
+        .state('role-detail-edit', {
             parent: 'role-detail',
             url: '/detail/edit',
             data: {
-                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/role/role-dialog.html',
+                    templateUrl: 'app/administrationPanel/role/role-dialog.html',
                     controller: 'RoleDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -108,15 +96,14 @@
                 });
             }]
         })
-        .state('role.new', {
+        .state('role-new', {
             parent: 'role',
             url: '/new',
             data: {
-                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/role/role-dialog.html',
+                    templateUrl: 'app/administrationPanel/role/role-dialog.html',
                     controller: 'RoleDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -137,15 +124,14 @@
                 });
             }]
         })
-        .state('role.edit', {
+        .state('role-edit', {
             parent: 'role',
             url: '/{id}/edit',
             data: {
-                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/role/role-dialog.html',
+                    templateUrl: 'app/administrationPanel/role/role-dialog.html',
                     controller: 'RoleDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -162,15 +148,14 @@
                 });
             }]
         })
-        .state('role.delete', {
+        .state('role-delete', {
             parent: 'role',
             url: '/{id}/delete',
             data: {
-                authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/role/role-delete-dialog.html',
+                    templateUrl: 'app/administrationPanel/role/role-delete-dialog.html',
                     controller: 'RoleDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

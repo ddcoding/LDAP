@@ -2,12 +2,12 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('RoleController', RoleController);
 
-    RoleController.$inject = ['$state', 'Role', 'RoleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    RoleController.$inject = ['$state', 'Role', 'RoleSearch', 'ParseLinks', 'paginationConstants', 'pagingParams'];
 
-    function RoleController($state, Role, RoleSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function RoleController($state, Role, RoleSearch, ParseLinks, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -54,7 +54,7 @@
                 vm.page = pagingParams.page;
             }
             function onError(error) {
-                AlertService.error(error.data.message);
+                console.log(error.data.message);
             }
         }
 

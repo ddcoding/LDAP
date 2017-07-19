@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('RoleDeleteController',RoleDeleteController);
 
     RoleDeleteController.$inject = ['$uibModalInstance', 'entity', 'Role'];

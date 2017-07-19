@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('robimytov2App')
+        .module('ldapApp')
         .controller('RoleDialogController', RoleDialogController);
 
     RoleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Role', 'Authorization', 'ApplicationUser', 'UserGroup'];
@@ -36,7 +36,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('robimytov2App:roleUpdate', result);
+            $scope.$emit('ldapApp:roleUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }
