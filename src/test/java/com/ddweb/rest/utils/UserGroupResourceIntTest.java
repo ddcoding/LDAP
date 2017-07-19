@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the UserGroupResource REST controller.
  *
- * @see UserGroupResource
+ * @see com.ddweb.web.rest.resources.UserGroupResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LdapApplication.class)
@@ -70,9 +70,9 @@ public class UserGroupResourceIntTest {
         MockitoAnnotations.initMocks(this);
         UserGroupResource userGroupResource = new UserGroupResource(userGroupRepository, userGroupSearchRepository);
         this.restUserGroupMockMvc = MockMvcBuilders.standaloneSetup(userGroupResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
+                .setCustomArgumentResolvers(pageableArgumentResolver)
+                .setControllerAdvice(exceptionTranslator)
+                .setMessageConverters(jacksonMessageConverter).build();
     }
 
     /**
@@ -83,8 +83,8 @@ public class UserGroupResourceIntTest {
      */
     public static UserGroup createEntity(EntityManager em) {
         UserGroup userGroup = new UserGroup()
-            .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+                .name(DEFAULT_NAME)
+                .description(DEFAULT_DESCRIPTION);
         return userGroup;
     }
 
@@ -101,9 +101,9 @@ public class UserGroupResourceIntTest {
 
         // Create the UserGroup
         restUserGroupMockMvc.perform(post("/api/user-groups")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userGroup)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(userGroup)))
+                .andExpect(status().isCreated());
 
         // Validate the UserGroup in the database
         List<UserGroup> userGroupList = userGroupRepository.findAll();
@@ -127,9 +127,9 @@ public class UserGroupResourceIntTest {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restUserGroupMockMvc.perform(post("/api/user-groups")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userGroup)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(userGroup)))
+                .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
         List<UserGroup> userGroupList = userGroupRepository.findAll();
@@ -146,9 +146,9 @@ public class UserGroupResourceIntTest {
         // Create the UserGroup, which fails.
 
         restUserGroupMockMvc.perform(post("/api/user-groups")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userGroup)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(userGroup)))
+                .andExpect(status().isBadRequest());
 
         List<UserGroup> userGroupList = userGroupRepository.findAll();
         assertThat(userGroupList).hasSize(databaseSizeBeforeTest);
@@ -162,11 +162,11 @@ public class UserGroupResourceIntTest {
 
         // Get all the userGroupList
         restUserGroupMockMvc.perform(get("/api/user-groups?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -177,11 +177,11 @@ public class UserGroupResourceIntTest {
 
         // Get the userGroup
         restUserGroupMockMvc.perform(get("/api/user-groups/{id}", userGroup.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(userGroup.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.id").value(userGroup.getId().intValue()))
+                .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+                .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -189,7 +189,7 @@ public class UserGroupResourceIntTest {
     public void getNonExistingUserGroup() throws Exception {
         // Get the userGroup
         restUserGroupMockMvc.perform(get("/api/user-groups/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -203,13 +203,13 @@ public class UserGroupResourceIntTest {
         // Update the userGroup
         UserGroup updatedUserGroup = userGroupRepository.findOne(userGroup.getId());
         updatedUserGroup
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+                .name(UPDATED_NAME)
+                .description(UPDATED_DESCRIPTION);
 
         restUserGroupMockMvc.perform(put("/api/user-groups")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedUserGroup)))
-            .andExpect(status().isOk());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(updatedUserGroup)))
+                .andExpect(status().isOk());
 
         // Validate the UserGroup in the database
         List<UserGroup> userGroupList = userGroupRepository.findAll();
@@ -232,9 +232,9 @@ public class UserGroupResourceIntTest {
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restUserGroupMockMvc.perform(put("/api/user-groups")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(userGroup)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(userGroup)))
+                .andExpect(status().isCreated());
 
         // Validate the UserGroup in the database
         List<UserGroup> userGroupList = userGroupRepository.findAll();
@@ -251,8 +251,8 @@ public class UserGroupResourceIntTest {
 
         // Get the userGroup
         restUserGroupMockMvc.perform(delete("/api/user-groups/{id}", userGroup.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk());
+                .accept(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
         boolean userGroupExistsInEs = userGroupSearchRepository.exists(userGroup.getId());
@@ -272,11 +272,11 @@ public class UserGroupResourceIntTest {
 
         // Search the userGroup
         restUserGroupMockMvc.perform(get("/api/_search/user-groups?query=id:" + userGroup.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(userGroup.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test

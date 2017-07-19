@@ -5,10 +5,9 @@
         .module('ldapApp')
         .controller('RoleController', RoleController);
 
-    RoleController.$inject = ['$state', 'Role', 'RoleSearch', 'ParseLinks', 'paginationConstants', 'pagingParams','Auth'];
+    RoleController.$inject = ['$state', 'Role', 'RoleSearch', 'ParseLinks', 'paginationConstants', 'pagingParams'];
 
-    function RoleController($state, Role, RoleSearch, ParseLinks, paginationConstants, pagingParams, Auth) {
-        Auth.authorize();
+    function RoleController($state, Role, RoleSearch, ParseLinks, paginationConstants, pagingParams) {
 
         var vm = this;
 

@@ -14,10 +14,10 @@ import java.util.List;
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Long> {
 
-    @Query("select distinct role from Role role left join fetch role.includedAuthorizations left join fetch role.excludedAuthorizations left join fetch role.actualRoles left join fetch role.parentRoles left join fetch role.users left join fetch role.userGroups")
+    @Query("select distinct role from Role role left join fetch role.includedAuthorizations left join fetch role.excludedAuthorizations left join fetch role.actualRoles left join fetch role.parentRoles")
     List<Role> findAllWithEagerRelationships();
 
-    @Query("select role from Role role left join fetch role.includedAuthorizations left join fetch role.excludedAuthorizations left join fetch role.actualRoles left join fetch role.parentRoles left join fetch role.users left join fetch role.userGroups where role.id =:id")
+    @Query("select role from Role role left join fetch role.includedAuthorizations left join fetch role.excludedAuthorizations left join fetch role.actualRoles left join fetch role.parentRoles where role.id =:id")
     Role findOneWithEagerRelationships(@Param("id") Long id);
 
 }

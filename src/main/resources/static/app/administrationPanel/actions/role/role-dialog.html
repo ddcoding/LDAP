@@ -1,25 +1,25 @@
-<form unsaved-warning-form style="background-color: #ccc" name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+<form style="background-color: #ccc" name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
-                ng-click="vm.clear()">&times;
-        </button>
+                ng-click="vm.clear()">&times;</button>
         <h4 class="modal-title" id="myRoleLabel">Create or edit a Role</h4>
     </div>
     <div class="modal-body">
         <div class="form-group" ng-show="vm.role.id">
             <label for="id">ID</label>
             <input type="text" class="form-control" id="id" name="id"
-                   ng-model="vm.role.id" readonly/>
+                    ng-model="vm.role.id" readonly />
         </div>
         <div class="form-group">
             <label class="control-label" for="field_name">Name</label>
             <input type="text" class="form-control" name="name" id="field_name"
-                   ng-model="vm.role.name"
-                   required/>
+                    ng-model="vm.role.name"
+                    required/>
             <div ng-show="editForm.name.$invalid">
                 <p class="help-block"
-                   ng-show="editForm.name.$error.required">
+                    ng-show="editForm.name.$error.required">
                     This field is required.
                 </p>
             </div>
@@ -27,41 +27,25 @@
         <div class="form-group">
             <label class="control-label" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
-                   ng-model="vm.role.description"
-            />
+                    ng-model="vm.role.description"
+                    />
         </div>
 
         <div class="form-group">
             <label for="field_includedAuthorization">Included Authorization</label>
-            <select class="form-control" id="field_includedAuthorization" multiple name="includedAuthorization"
-                    ng-model="vm.role.includedAuthorizations"
-                    ng-options="authorization as authorization.id for authorization in vm.authorizations track by authorization.id"></select>
+            <select class="form-control" id="field_includedAuthorization" multiple name="includedAuthorization" ng-model="vm.role.includedAuthorizations" ng-options="authorization as authorization.name for authorization in vm.authorizations track by authorization.id"></select>
         </div>
         <div class="form-group">
             <label for="field_excludedAuthorization">Excluded Authorization</label>
-            <select class="form-control" id="field_excludedAuthorization" multiple name="excludedAuthorization"
-                    ng-model="vm.role.excludedAuthorizations"
-                    ng-options="authorization as authorization.id for authorization in vm.authorizations track by authorization.id"></select>
+            <select class="form-control" id="field_excludedAuthorization" multiple name="excludedAuthorization" ng-model="vm.role.excludedAuthorizations" ng-options="authorization as authorization.name for authorization in vm.authorizations track by authorization.id"></select>
         </div>
         <div class="form-group">
             <label for="field_actualRole">Actual Role</label>
-            <select class="form-control" id="field_actualRole" multiple name="actualRole" ng-model="vm.role.actualRoles"
-                    ng-options="authorization as authorization.id for authorization in vm.authorizations track by authorization.id"></select>
+            <select class="form-control" id="field_actualRole" multiple name="actualRole" ng-model="vm.role.actualRoles" ng-options="authorization as authorization.name for authorization in vm.authorizations track by authorization.id"></select>
         </div>
         <div class="form-group">
             <label for="field_parentRole">Parent Role</label>
-            <select class="form-control" id="field_parentRole" multiple name="parentRole" ng-model="vm.role.parentRoles"
-                    ng-options="role as role.id for role in vm.roles track by role.id"></select>
-        </div>
-        <div class="form-group">
-            <label for="field_users">Users</label>
-            <select class="form-control" id="field_users" multiple name="users" ng-model="vm.role.users"
-                    ng-options="applicationUser as applicationUser.id for applicationUser in vm.applicationusers track by applicationUser.id"></select>
-        </div>
-        <div class="form-group">
-            <label for="field_userGroups">User Groups</label>
-            <select class="form-control" id="field_userGroups" multiple name="userGroups" ng-model="vm.role.userGroups"
-                    ng-options="userGroup as userGroup.id for userGroup in vm.usergroups track by userGroup.id"></select>
+            <select class="form-control" id="field_parentRole" multiple name="parentRole" ng-model="vm.role.parentRoles" ng-options="role as role.name for role in vm.roles track by role.id"></select>
         </div>
     </div>
     <div class="modal-footer">

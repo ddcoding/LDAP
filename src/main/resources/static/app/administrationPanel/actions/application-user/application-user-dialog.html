@@ -1,5 +1,5 @@
 
-<form unsaved-warning-form style="background-color: #ccc" name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+<form style="background-color: #ccc" name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
 
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -43,7 +43,7 @@
                     required/>
             <div ng-show="editForm.login.$invalid">
                 <p class="help-block"
-                    ng-show="editForm.login.$error.required" >
+                    ng-show="editForm.login.$error.required">
                     This field is required.
                 </p>
             </div>
@@ -86,8 +86,12 @@
         </div>
 
         <div class="form-group">
+            <label for="field_roles">Roles</label>
+            <select class="form-control" id="field_roles" multiple name="roles" ng-model="vm.applicationUser.roles" ng-options="role as role.name for role in vm.roles track by role.id"></select>
+        </div>
+        <div class="form-group">
             <label for="field_userGroups">User Groups</label>
-            <select class="form-control" id="field_userGroups" multiple name="userGroups" ng-model="vm.applicationUser.userGroups" ng-options="userGroup as userGroup.id for userGroup in vm.usergroups track by userGroup.id"></select>
+            <select class="form-control" id="field_userGroups" multiple name="userGroups" ng-model="vm.applicationUser.userGroups" ng-options="userGroup as userGroup.name for userGroup in vm.usergroups track by userGroup.id"></select>
         </div>
     </div>
     <div class="modal-footer">

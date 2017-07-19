@@ -11,6 +11,12 @@
         <dd>
             <span>{{vm.userGroup.description}}</span>
         </dd>
+        <dt><span>Roles</span></dt>
+        <dd>
+            <span ng-repeat="roles in vm.userGroup.roles">
+                <a ui-sref="role-detail({id: roles.id})">{{roles.name}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
     </dl>
 
     <button type="submit"
@@ -19,7 +25,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button" ui-sref="user-group-detail.edit({id:vm.userGroup.id})" class="btn btn-primary">
+    <button type="button" ui-sref="user-group-detail-edit({id:vm.userGroup.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down"> Edit</span>
     </button>

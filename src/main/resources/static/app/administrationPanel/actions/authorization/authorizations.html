@@ -1,11 +1,11 @@
 <div>
-    <h2 class="title-main">Authorizations</h2>
+    <h2>Authorizations</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="authorization-new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs-down">
+                    <span class="hidden-xs-down" >
                         Create new Authorization
                     </span>
                 </button>
@@ -13,7 +13,7 @@
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="search">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>

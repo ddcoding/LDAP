@@ -70,9 +70,9 @@ public class AuthorizationResourceIntTest {
         MockitoAnnotations.initMocks(this);
         AuthorizationResource authorizationResource = new AuthorizationResource(authorizationRepository, authorizationSearchRepository);
         this.restAuthorizationMockMvc = MockMvcBuilders.standaloneSetup(authorizationResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
+                .setCustomArgumentResolvers(pageableArgumentResolver)
+                .setControllerAdvice(exceptionTranslator)
+                .setMessageConverters(jacksonMessageConverter).build();
     }
 
     /**
@@ -83,8 +83,8 @@ public class AuthorizationResourceIntTest {
      */
     public static Authorization createEntity(EntityManager em) {
         Authorization authorization = new Authorization()
-            .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+                .name(DEFAULT_NAME)
+                .description(DEFAULT_DESCRIPTION);
         return authorization;
     }
 
@@ -101,9 +101,9 @@ public class AuthorizationResourceIntTest {
 
         // Create the Authorization
         restAuthorizationMockMvc.perform(post("/api/authorizations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(authorization)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(authorization)))
+                .andExpect(status().isCreated());
 
         // Validate the Authorization in the database
         List<Authorization> authorizationList = authorizationRepository.findAll();
@@ -127,9 +127,9 @@ public class AuthorizationResourceIntTest {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAuthorizationMockMvc.perform(post("/api/authorizations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(authorization)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(authorization)))
+                .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
         List<Authorization> authorizationList = authorizationRepository.findAll();
@@ -146,9 +146,9 @@ public class AuthorizationResourceIntTest {
         // Create the Authorization, which fails.
 
         restAuthorizationMockMvc.perform(post("/api/authorizations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(authorization)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(authorization)))
+                .andExpect(status().isBadRequest());
 
         List<Authorization> authorizationList = authorizationRepository.findAll();
         assertThat(authorizationList).hasSize(databaseSizeBeforeTest);
@@ -162,11 +162,11 @@ public class AuthorizationResourceIntTest {
 
         // Get all the authorizationList
         restAuthorizationMockMvc.perform(get("/api/authorizations?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(authorization.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(authorization.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -177,11 +177,11 @@ public class AuthorizationResourceIntTest {
 
         // Get the authorization
         restAuthorizationMockMvc.perform(get("/api/authorizations/{id}", authorization.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(authorization.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.id").value(authorization.getId().intValue()))
+                .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+                .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -189,7 +189,7 @@ public class AuthorizationResourceIntTest {
     public void getNonExistingAuthorization() throws Exception {
         // Get the authorization
         restAuthorizationMockMvc.perform(get("/api/authorizations/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -203,13 +203,13 @@ public class AuthorizationResourceIntTest {
         // Update the authorization
         Authorization updatedAuthorization = authorizationRepository.findOne(authorization.getId());
         updatedAuthorization
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+                .name(UPDATED_NAME)
+                .description(UPDATED_DESCRIPTION);
 
         restAuthorizationMockMvc.perform(put("/api/authorizations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedAuthorization)))
-            .andExpect(status().isOk());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(updatedAuthorization)))
+                .andExpect(status().isOk());
 
         // Validate the Authorization in the database
         List<Authorization> authorizationList = authorizationRepository.findAll();
@@ -232,9 +232,9 @@ public class AuthorizationResourceIntTest {
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restAuthorizationMockMvc.perform(put("/api/authorizations")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(authorization)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(authorization)))
+                .andExpect(status().isCreated());
 
         // Validate the Authorization in the database
         List<Authorization> authorizationList = authorizationRepository.findAll();
@@ -251,8 +251,8 @@ public class AuthorizationResourceIntTest {
 
         // Get the authorization
         restAuthorizationMockMvc.perform(delete("/api/authorizations/{id}", authorization.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk());
+                .accept(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
         boolean authorizationExistsInEs = authorizationSearchRepository.exists(authorization.getId());
@@ -272,11 +272,11 @@ public class AuthorizationResourceIntTest {
 
         // Search the authorization
         restAuthorizationMockMvc.perform(get("/api/_search/authorizations?query=id:" + authorization.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(authorization.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(authorization.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test

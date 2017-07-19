@@ -14,37 +14,25 @@
         <dt><span>Included Authorization</span></dt>
         <dd>
             <span ng-repeat="includedAuthorization in vm.role.includedAuthorizations">
-                <a ui-sref="authorization-detail({id: includedAuthorization.id})">{{includedAuthorization.id}}</a>{{$last ? '' : ', '}}
+                <a ui-sref="authorization-detail({id: includedAuthorization.id})">{{includedAuthorization.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
         <dt><span>Excluded Authorization</span></dt>
         <dd>
             <span ng-repeat="excludedAuthorization in vm.role.excludedAuthorizations">
-                <a ui-sref="authorization-detail({id: excludedAuthorization.id})">{{excludedAuthorization.id}}</a>{{$last ? '' : ', '}}
+                <a ui-sref="authorization-detail({id: excludedAuthorization.id})">{{excludedAuthorization.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
         <dt><span>Actual Role</span></dt>
         <dd>
             <span ng-repeat="actualRole in vm.role.actualRoles">
-                <a ui-sref="authorization-detail({id: actualRole.id})">{{actualRole.id}}</a>{{$last ? '' : ', '}}
+                <a ui-sref="authorization-detail({id: actualRole.id})">{{actualRole.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
         <dt><span>Parent Role</span></dt>
         <dd>
             <span ng-repeat="parentRole in vm.role.parentRoles">
-                <a ui-sref="role-detail({id: parentRole.id})">{{parentRole.id}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span>Users</span></dt>
-        <dd>
-            <span ng-repeat="users in vm.role.users">
-                <a ui-sref="application-user-detail({id: users.id})">{{users.id}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span>User Groups</span></dt>
-        <dd>
-            <span ng-repeat="userGroups in vm.role.userGroups">
-                <a ui-sref="user-group-detail({id: userGroups.id})">{{userGroups.id}}</a>{{$last ? '' : ', '}}
+                <a ui-sref="role-detail({id: parentRole.id})">{{parentRole.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
     </dl>

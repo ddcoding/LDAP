@@ -5,10 +5,9 @@
         .module('ldapApp')
         .controller('UserGroupController', UserGroupController);
 
-    UserGroupController.$inject = ['$state', 'UserGroup', 'UserGroupSearch', 'ParseLinks', 'paginationConstants', 'pagingParams','Auth'];
+    UserGroupController.$inject = ['$state', 'UserGroup', 'UserGroupSearch', 'ParseLinks', 'paginationConstants', 'pagingParams'];
 
-    function UserGroupController($state, UserGroup, UserGroupSearch, ParseLinks, paginationConstants, pagingParams,Auth) {
-        Auth.authorize();
+    function UserGroupController($state, UserGroup, UserGroupSearch, ParseLinks, paginationConstants, pagingParams) {
 
         var vm = this;
 

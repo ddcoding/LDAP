@@ -1,19 +1,19 @@
 <div>
-    <h2 class="title-main">Application Users</h2>
+    <h2>Application Users</h2>
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="application-user-new" >
                     <span class="glyphicon glyphicon-plus"></span>
-                    <span class="hidden-xs-down">
+                    <span class="hidden-xs-down" >
                         Create new Application User
                     </span>
                 </button>
             </div>
             <div class="col-xs-8 no-padding-right">
-                <form id="search1" name="searchForm" class="form-inline">
+                <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
-                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="search">
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="Query">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
                                 <span class="glyphicon glyphicon-search"></span>
@@ -80,7 +80,7 @@
         </table>
     <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <div uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></div>
+        <div uib-pagination="" class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></div>
     </div>
     </div>
 </div>

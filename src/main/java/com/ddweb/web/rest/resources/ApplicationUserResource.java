@@ -5,8 +5,8 @@ import com.ddweb.repository.ApplicationUserRepository;
 import com.ddweb.repository.search.ApplicationUserSearchRepository;
 import com.ddweb.web.rest.util.HeaderUtil;
 import com.ddweb.web.rest.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing ApplicationUser.
@@ -60,8 +63,8 @@ public class ApplicationUserResource {
         ApplicationUser result = applicationUserRepository.save(applicationUser);
         applicationUserSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/application-users/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -82,8 +85,8 @@ public class ApplicationUserResource {
         ApplicationUser result = applicationUserRepository.save(applicationUser);
         applicationUserSearchRepository.save(result);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, applicationUser.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, applicationUser.getId().toString()))
+                .body(result);
     }
 
     /**

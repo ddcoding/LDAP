@@ -1,11 +1,11 @@
 package com.ddweb.rest.utils;
 
-import com.ddweb.LdapApplication;
 import com.ddweb.domain.ApplicationUser;
 import com.ddweb.repository.ApplicationUserRepository;
 import com.ddweb.repository.search.ApplicationUserSearchRepository;
 import com.ddweb.web.rest.errors.ExceptionTranslator;
 import com.ddweb.web.rest.resources.ApplicationUserResource;
+import com.ddweb.LdapApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -82,9 +82,9 @@ public class ApplicationUserResourceIntTest {
         MockitoAnnotations.initMocks(this);
         ApplicationUserResource applicationUserResource = new ApplicationUserResource(applicationUserRepository, applicationUserSearchRepository);
         this.restApplicationUserMockMvc = MockMvcBuilders.standaloneSetup(applicationUserResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
+                .setCustomArgumentResolvers(pageableArgumentResolver)
+                .setControllerAdvice(exceptionTranslator)
+                .setMessageConverters(jacksonMessageConverter).build();
     }
 
     /**
@@ -95,12 +95,12 @@ public class ApplicationUserResourceIntTest {
      */
     public static ApplicationUser createEntity(EntityManager em) {
         ApplicationUser applicationUser = new ApplicationUser()
-            .branch(DEFAULT_BRANCH)
-            .name(DEFAULT_NAME)
-            .login(DEFAULT_LOGIN)
-            .surname(DEFAULT_SURNAME)
-            .position(DEFAULT_POSITION)
-            .email(DEFAULT_EMAIL);
+                .branch(DEFAULT_BRANCH)
+                .name(DEFAULT_NAME)
+                .login(DEFAULT_LOGIN)
+                .surname(DEFAULT_SURNAME)
+                .position(DEFAULT_POSITION)
+                .email(DEFAULT_EMAIL);
         return applicationUser;
     }
 
@@ -117,9 +117,9 @@ public class ApplicationUserResourceIntTest {
 
         // Create the ApplicationUser
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isCreated());
 
         // Validate the ApplicationUser in the database
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
@@ -147,9 +147,9 @@ public class ApplicationUserResourceIntTest {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
@@ -166,9 +166,9 @@ public class ApplicationUserResourceIntTest {
         // Create the ApplicationUser, which fails.
 
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
         assertThat(applicationUserList).hasSize(databaseSizeBeforeTest);
@@ -184,9 +184,9 @@ public class ApplicationUserResourceIntTest {
         // Create the ApplicationUser, which fails.
 
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
         assertThat(applicationUserList).hasSize(databaseSizeBeforeTest);
@@ -202,9 +202,9 @@ public class ApplicationUserResourceIntTest {
         // Create the ApplicationUser, which fails.
 
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
         assertThat(applicationUserList).hasSize(databaseSizeBeforeTest);
@@ -220,9 +220,9 @@ public class ApplicationUserResourceIntTest {
         // Create the ApplicationUser, which fails.
 
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
         assertThat(applicationUserList).hasSize(databaseSizeBeforeTest);
@@ -238,9 +238,9 @@ public class ApplicationUserResourceIntTest {
         // Create the ApplicationUser, which fails.
 
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
         assertThat(applicationUserList).hasSize(databaseSizeBeforeTest);
@@ -256,9 +256,9 @@ public class ApplicationUserResourceIntTest {
         // Create the ApplicationUser, which fails.
 
         restApplicationUserMockMvc.perform(post("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isBadRequest());
 
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
         assertThat(applicationUserList).hasSize(databaseSizeBeforeTest);
@@ -272,15 +272,15 @@ public class ApplicationUserResourceIntTest {
 
         // Get all the applicationUserList
         restApplicationUserMockMvc.perform(get("/api/application-users?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(applicationUser.getId().intValue())))
-            .andExpect(jsonPath("$.[*].branch").value(hasItem(DEFAULT_BRANCH.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
-            .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
-            .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(applicationUser.getId().intValue())))
+                .andExpect(jsonPath("$.[*].branch").value(hasItem(DEFAULT_BRANCH.toString())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
+                .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
+                .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
+                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test
@@ -291,15 +291,15 @@ public class ApplicationUserResourceIntTest {
 
         // Get the applicationUser
         restApplicationUserMockMvc.perform(get("/api/application-users/{id}", applicationUser.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(applicationUser.getId().intValue()))
-            .andExpect(jsonPath("$.branch").value(DEFAULT_BRANCH.toString()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.login").value(DEFAULT_LOGIN.toString()))
-            .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME.toString()))
-            .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
-            .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.id").value(applicationUser.getId().intValue()))
+                .andExpect(jsonPath("$.branch").value(DEFAULT_BRANCH.toString()))
+                .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+                .andExpect(jsonPath("$.login").value(DEFAULT_LOGIN.toString()))
+                .andExpect(jsonPath("$.surname").value(DEFAULT_SURNAME.toString()))
+                .andExpect(jsonPath("$.position").value(DEFAULT_POSITION.toString()))
+                .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()));
     }
 
     @Test
@@ -307,7 +307,7 @@ public class ApplicationUserResourceIntTest {
     public void getNonExistingApplicationUser() throws Exception {
         // Get the applicationUser
         restApplicationUserMockMvc.perform(get("/api/application-users/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -321,17 +321,17 @@ public class ApplicationUserResourceIntTest {
         // Update the applicationUser
         ApplicationUser updatedApplicationUser = applicationUserRepository.findOne(applicationUser.getId());
         updatedApplicationUser
-            .branch(UPDATED_BRANCH)
-            .name(UPDATED_NAME)
-            .login(UPDATED_LOGIN)
-            .surname(UPDATED_SURNAME)
-            .position(UPDATED_POSITION)
-            .email(UPDATED_EMAIL);
+                .branch(UPDATED_BRANCH)
+                .name(UPDATED_NAME)
+                .login(UPDATED_LOGIN)
+                .surname(UPDATED_SURNAME)
+                .position(UPDATED_POSITION)
+                .email(UPDATED_EMAIL);
 
         restApplicationUserMockMvc.perform(put("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedApplicationUser)))
-            .andExpect(status().isOk());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(updatedApplicationUser)))
+                .andExpect(status().isOk());
 
         // Validate the ApplicationUser in the database
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
@@ -358,9 +358,9 @@ public class ApplicationUserResourceIntTest {
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restApplicationUserMockMvc.perform(put("/api/application-users")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(applicationUser)))
+                .andExpect(status().isCreated());
 
         // Validate the ApplicationUser in the database
         List<ApplicationUser> applicationUserList = applicationUserRepository.findAll();
@@ -377,8 +377,8 @@ public class ApplicationUserResourceIntTest {
 
         // Get the applicationUser
         restApplicationUserMockMvc.perform(delete("/api/application-users/{id}", applicationUser.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk());
+                .accept(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
         boolean applicationUserExistsInEs = applicationUserSearchRepository.exists(applicationUser.getId());
@@ -398,15 +398,15 @@ public class ApplicationUserResourceIntTest {
 
         // Search the applicationUser
         restApplicationUserMockMvc.perform(get("/api/_search/application-users?query=id:" + applicationUser.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(applicationUser.getId().intValue())))
-            .andExpect(jsonPath("$.[*].branch").value(hasItem(DEFAULT_BRANCH.toString())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
-            .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
-            .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
-            .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(applicationUser.getId().intValue())))
+                .andExpect(jsonPath("$.[*].branch").value(hasItem(DEFAULT_BRANCH.toString())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].login").value(hasItem(DEFAULT_LOGIN.toString())))
+                .andExpect(jsonPath("$.[*].surname").value(hasItem(DEFAULT_SURNAME.toString())))
+                .andExpect(jsonPath("$.[*].position").value(hasItem(DEFAULT_POSITION.toString())))
+                .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())));
     }
 
     @Test

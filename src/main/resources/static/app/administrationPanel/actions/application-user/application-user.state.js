@@ -5,16 +5,16 @@
         .module('ldapApp')
         .config(stateConfig);
 
-    stateConfig.$inject = ['$stateProvider','unsavedWarningsConfigProvider'];
+    stateConfig.$inject = ['$stateProvider'];
 
-    function stateConfig($stateProvider,unsavedWarningsConfigProvider) {
+    function stateConfig($stateProvider) {
         $stateProvider
         .state('application-user', {
             parent: 'entity',
             url: '/application-user?page&sort&search',
             data: {
                 // authorities: ['ROLE_USER'],
-                pageTitle: 'panel'
+                pageTitle: 'ApplicationUsers'
             },
             views: {
                 'content@': {
@@ -51,7 +51,7 @@
             url: '/application-user/{id}',
             data: {
                 // authorities: ['ROLE_USER'],
-                pageTitle: 'User details'
+                pageTitle: 'ApplicationUser'
             },
             views: {
                 'content@': {
@@ -66,7 +66,7 @@
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'application-user',
+                        name: 'application-user',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -181,9 +181,6 @@
                 });
             }]
         });
-
-        unsavedWarningsConfigProvider.navigateMessage="Masz niezapisane zmiany w formularzu, czy na pewno chcesz opuścić stronę?";
-        unsavedWarningsConfigProvider.routeEvent='$locationChangeStart';
     }
 
 })();

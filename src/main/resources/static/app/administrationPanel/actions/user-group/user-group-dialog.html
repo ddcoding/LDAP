@@ -31,6 +31,10 @@
                     />
         </div>
 
+        <div class="form-group">
+            <label for="field_roles">Roles</label>
+            <select class="form-control" id="field_roles" multiple name="roles" ng-model="vm.userGroup.roles" ng-options="role as role.name for role in vm.roles track by role.id"></select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

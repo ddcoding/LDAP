@@ -5,8 +5,8 @@ import com.ddweb.repository.RoleRepository;
 import com.ddweb.repository.search.RoleSearchRepository;
 import com.ddweb.web.rest.util.HeaderUtil;
 import com.ddweb.web.rest.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Role.
@@ -60,8 +63,8 @@ public class RoleResource {
         Role result = roleRepository.save(role);
         roleSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/roles/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -82,8 +85,8 @@ public class RoleResource {
         Role result = roleRepository.save(role);
         roleSearchRepository.save(result);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, role.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, role.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -136,7 +139,7 @@ public class RoleResource {
      * @return the result of the search
      */
     @GetMapping("/_search/roles")
-    public ResponseEntity<List<Role>> searchRoles(@RequestParam String query,Pageable pageable) {
+    public ResponseEntity<List<Role>> searchRoles(@RequestParam String query, @ApiParam Pageable pageable) {
         log.debug("REST request to search for a page of Roles for query {}", query);
         Page<Role> page = roleSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/roles");

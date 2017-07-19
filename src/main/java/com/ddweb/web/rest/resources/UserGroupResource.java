@@ -5,8 +5,8 @@ import com.ddweb.repository.UserGroupRepository;
 import com.ddweb.repository.search.UserGroupSearchRepository;
 import com.ddweb.web.rest.util.HeaderUtil;
 import com.ddweb.web.rest.util.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
+import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -19,10 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing UserGroup.
@@ -60,8 +63,8 @@ public class UserGroupResource {
         UserGroup result = userGroupRepository.save(userGroup);
         userGroupSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/user-groups/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -82,8 +85,8 @@ public class UserGroupResource {
         UserGroup result = userGroupRepository.save(userGroup);
         userGroupSearchRepository.save(result);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, userGroup.getId().toString()))
-            .body(result);
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, userGroup.getId().toString()))
+                .body(result);
     }
 
     /**
@@ -109,7 +112,7 @@ public class UserGroupResource {
     @GetMapping("/user-groups/{id}")
     public ResponseEntity<UserGroup> getUserGroup(@PathVariable Long id) {
         log.debug("REST request to get UserGroup : {}", id);
-        UserGroup userGroup = userGroupRepository.findOne(id);
+        UserGroup userGroup = userGroupRepository.findOneWithEagerRelationships(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(userGroup));
     }
 

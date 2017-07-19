@@ -14,7 +14,7 @@
             url: '/authorization?page&sort&search',
             data: {
                 // authorities: ['ROLE_USER'],
-                pageTitle: 'panel'
+                pageTitle: 'Authorizations'
             },
             views: {
                 'content@': {
@@ -51,11 +51,11 @@
             url: '/authorization/{id}',
             data: {
                 // authorities: ['ROLE_USER'],
-                pageTitle: 'authorizations'
+                pageTitle: 'Authorization'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/authorization/authorization-detail.html',
+                    templateUrl: 'app/administrationPanel/actions/authorization/authorization-detail.html',
                     controller: 'AuthorizationDetailController',
                     controllerAs: 'vm'
                 }
@@ -66,7 +66,7 @@
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'authorization',
+                        name: 'authorization',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };

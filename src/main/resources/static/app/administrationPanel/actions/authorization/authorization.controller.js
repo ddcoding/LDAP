@@ -5,10 +5,9 @@
         .module('ldapApp')
         .controller('AuthorizationController', AuthorizationController);
 
-    AuthorizationController.$inject = ['$state', 'Authorization', 'AuthorizationSearch', 'ParseLinks', 'paginationConstants', 'pagingParams','Auth'];
+    AuthorizationController.$inject = ['$state', 'Authorization', 'AuthorizationSearch', 'ParseLinks', 'paginationConstants', 'pagingParams'];
 
-    function AuthorizationController($state, Authorization, AuthorizationSearch, ParseLinks, paginationConstants, pagingParams, Auth) {
-        Auth.authorize();
+    function AuthorizationController($state, Authorization, AuthorizationSearch, ParseLinks, paginationConstants, pagingParams) {
 
         var vm = this;
 

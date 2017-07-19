@@ -1,8 +1,5 @@
 package com.ddweb.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -52,14 +49,16 @@ public class ApplicationUser implements Serializable {
     private String email;
 
     @ManyToMany
+    @JoinTable(name = "application_user_roles",
+            joinColumns = @JoinColumn(name="application_users_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="roles_id", referencedColumnName="id"))
+    private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany
     @JoinTable(name = "application_user_user_groups",
             joinColumns = @JoinColumn(name="application_users_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="user_groups_id", referencedColumnName="id"))
     private Set<UserGroup> userGroups = new HashSet<>();
-
-    @ManyToMany(mappedBy = "users")
-    @JsonIgnore
-    private Set<Role> roles = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -147,31 +146,6 @@ public class ApplicationUser implements Serializable {
         this.email = email;
     }
 
-    public Set<UserGroup> getUserGroups() {
-        return userGroups;
-    }
-
-    public ApplicationUser userGroups(Set<UserGroup> userGroups) {
-        this.userGroups = userGroups;
-        return this;
-    }
-
-    public ApplicationUser addUserGroups(UserGroup userGroup) {
-        this.userGroups.add(userGroup);
-        userGroup.getUsers().add(this);
-        return this;
-    }
-
-    public ApplicationUser removeUserGroups(UserGroup userGroup) {
-        this.userGroups.remove(userGroup);
-        userGroup.getUsers().remove(this);
-        return this;
-    }
-
-    public void setUserGroups(Set<UserGroup> userGroups) {
-        this.userGroups = userGroups;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
@@ -195,6 +169,31 @@ public class ApplicationUser implements Serializable {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Set<UserGroup> getUserGroups() {
+        return userGroups;
+    }
+
+    public ApplicationUser userGroups(Set<UserGroup> userGroups) {
+        this.userGroups = userGroups;
+        return this;
+    }
+
+    public ApplicationUser addUserGroups(UserGroup userGroup) {
+        this.userGroups.add(userGroup);
+        userGroup.getUsers().add(this);
+        return this;
+    }
+
+    public ApplicationUser removeUserGroups(UserGroup userGroup) {
+        this.userGroups.remove(userGroup);
+        userGroup.getUsers().remove(this);
+        return this;
+    }
+
+    public void setUserGroups(Set<UserGroup> userGroups) {
+        this.userGroups = userGroups;
     }
 
     @Override

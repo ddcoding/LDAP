@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 /**
  * Test class for the RoleResource REST controller.
  *
- * @see RoleResource
+ * @see com.ddweb.web.rest.resources.RoleResource
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = LdapApplication.class)
@@ -70,9 +70,9 @@ public class RoleResourceIntTest {
         MockitoAnnotations.initMocks(this);
         RoleResource roleResource = new RoleResource(roleRepository, roleSearchRepository);
         this.restRoleMockMvc = MockMvcBuilders.standaloneSetup(roleResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setMessageConverters(jacksonMessageConverter).build();
+                .setCustomArgumentResolvers(pageableArgumentResolver)
+                .setControllerAdvice(exceptionTranslator)
+                .setMessageConverters(jacksonMessageConverter).build();
     }
 
     /**
@@ -83,8 +83,8 @@ public class RoleResourceIntTest {
      */
     public static Role createEntity(EntityManager em) {
         Role role = new Role()
-            .name(DEFAULT_NAME)
-            .description(DEFAULT_DESCRIPTION);
+                .name(DEFAULT_NAME)
+                .description(DEFAULT_DESCRIPTION);
         return role;
     }
 
@@ -101,9 +101,9 @@ public class RoleResourceIntTest {
 
         // Create the Role
         restRoleMockMvc.perform(post("/api/roles")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(role)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(role)))
+                .andExpect(status().isCreated());
 
         // Validate the Role in the database
         List<Role> roleList = roleRepository.findAll();
@@ -127,9 +127,9 @@ public class RoleResourceIntTest {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restRoleMockMvc.perform(post("/api/roles")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(role)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(role)))
+                .andExpect(status().isBadRequest());
 
         // Validate the Alice in the database
         List<Role> roleList = roleRepository.findAll();
@@ -146,9 +146,9 @@ public class RoleResourceIntTest {
         // Create the Role, which fails.
 
         restRoleMockMvc.perform(post("/api/roles")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(role)))
-            .andExpect(status().isBadRequest());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(role)))
+                .andExpect(status().isBadRequest());
 
         List<Role> roleList = roleRepository.findAll();
         assertThat(roleList).hasSize(databaseSizeBeforeTest);
@@ -162,11 +162,11 @@ public class RoleResourceIntTest {
 
         // Get all the roleList
         restRoleMockMvc.perform(get("/api/roles?sort=id,desc"))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test
@@ -177,11 +177,11 @@ public class RoleResourceIntTest {
 
         // Get the role
         restRoleMockMvc.perform(get("/api/roles/{id}", role.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(role.getId().intValue()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.id").value(role.getId().intValue()))
+                .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
+                .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()));
     }
 
     @Test
@@ -189,7 +189,7 @@ public class RoleResourceIntTest {
     public void getNonExistingRole() throws Exception {
         // Get the role
         restRoleMockMvc.perform(get("/api/roles/{id}", Long.MAX_VALUE))
-            .andExpect(status().isNotFound());
+                .andExpect(status().isNotFound());
     }
 
     @Test
@@ -203,13 +203,13 @@ public class RoleResourceIntTest {
         // Update the role
         Role updatedRole = roleRepository.findOne(role.getId());
         updatedRole
-            .name(UPDATED_NAME)
-            .description(UPDATED_DESCRIPTION);
+                .name(UPDATED_NAME)
+                .description(UPDATED_DESCRIPTION);
 
         restRoleMockMvc.perform(put("/api/roles")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedRole)))
-            .andExpect(status().isOk());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(updatedRole)))
+                .andExpect(status().isOk());
 
         // Validate the Role in the database
         List<Role> roleList = roleRepository.findAll();
@@ -232,9 +232,9 @@ public class RoleResourceIntTest {
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
         restRoleMockMvc.perform(put("/api/roles")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(role)))
-            .andExpect(status().isCreated());
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(role)))
+                .andExpect(status().isCreated());
 
         // Validate the Role in the database
         List<Role> roleList = roleRepository.findAll();
@@ -251,8 +251,8 @@ public class RoleResourceIntTest {
 
         // Get the role
         restRoleMockMvc.perform(delete("/api/roles/{id}", role.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
-            .andExpect(status().isOk());
+                .accept(TestUtil.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
         boolean roleExistsInEs = roleSearchRepository.exists(role.getId());
@@ -272,11 +272,11 @@ public class RoleResourceIntTest {
 
         // Search the role
         restRoleMockMvc.perform(get("/api/_search/roles?query=id:" + role.getId()))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(role.getId().intValue())))
+                .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
+                .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())));
     }
 
     @Test

@@ -27,10 +27,16 @@
         <dd>
             <span>{{vm.applicationUser.email}}</span>
         </dd>
+        <dt><span>Roles</span></dt>
+        <dd>
+            <span ng-repeat="roles in vm.applicationUser.roles">
+                <a ui-sref="role-detail({id: roles.id})">{{roles.name}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
         <dt><span>User Groups</span></dt>
         <dd>
             <span ng-repeat="userGroups in vm.applicationUser.userGroups">
-                <a ui-sref="user-group-detail({id: userGroups.id})">{{userGroups.id}}</a>{{$last ? '' : ', '}}
+                <a ui-sref="user-group-detail({id: userGroups.id})">{{userGroups.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
     </dl>
@@ -41,7 +47,7 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
     </button>
 
-    <button type="button" ui-sref="application-user-detail.edit({id:vm.applicationUser.id})" class="btn btn-primary">
+    <button type="button" ui-sref="application-user-detail-edit({id:vm.applicationUser.id})" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"></span>
         <span class="hidden-sm-down"> Edit</span>
     </button>

@@ -5,10 +5,9 @@
         .module('ldapApp')
         .controller('AuthorizationDetailController', AuthorizationDetailController);
 
-    AuthorizationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Authorization', 'Role','Auth'];
+    AuthorizationDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Authorization', 'Role'];
 
-    function AuthorizationDetailController($scope, $rootScope, $stateParams, previousState, entity, Authorization, Role, Auth) {
-        Auth.authorize();
+    function AuthorizationDetailController($scope, $rootScope, $stateParams, previousState, entity, Authorization, Role) {
         var vm = this;
 
         vm.authorization = entity;

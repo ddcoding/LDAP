@@ -1,8 +1,6 @@
 package com.ddweb.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -34,8 +32,10 @@ public class UserGroup implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @ManyToMany(mappedBy = "userGroups")
-    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "user_group_roles",
+            joinColumns = @JoinColumn(name="user_groups_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="roles_id", referencedColumnName="id"))
     private Set<Role> roles = new HashSet<>();
 
     @ManyToMany(mappedBy = "userGroups")
@@ -110,13 +110,13 @@ public class UserGroup implements Serializable {
         return this;
     }
 
-    public UserGroup addUsers(ApplicationUser applicationUser) {
+    public UserGroup addUser(ApplicationUser applicationUser) {
         this.users.add(applicationUser);
         applicationUser.getUserGroups().add(this);
         return this;
     }
 
-    public UserGroup removeUsers(ApplicationUser applicationUser) {
+    public UserGroup removeUser(ApplicationUser applicationUser) {
         this.users.remove(applicationUser);
         applicationUser.getUserGroups().remove(this);
         return this;
@@ -149,9 +149,9 @@ public class UserGroup implements Serializable {
     @Override
     public String toString() {
         return "UserGroup{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", description='" + getDescription() + "'" +
-            "}";
+                "id=" + getId() +
+                ", name='" + getName() + "'" +
+                ", description='" + getDescription() + "'" +
+                "}";
     }
 }

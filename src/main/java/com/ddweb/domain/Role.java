@@ -1,8 +1,6 @@
 package com.ddweb.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -58,21 +56,17 @@ public class Role implements Serializable {
             inverseJoinColumns = @JoinColumn(name="parent_roles_id", referencedColumnName="id"))
     private Set<Role> parentRoles = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "role_users",
-            joinColumns = @JoinColumn(name="roles_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="users_id", referencedColumnName="id"))
-    private Set<ApplicationUser> users = new HashSet<>();
-
-    @ManyToMany
-    @JoinTable(name = "role_user_groups",
-            joinColumns = @JoinColumn(name="roles_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="user_groups_id", referencedColumnName="id"))
-    private Set<UserGroup> userGroups = new HashSet<>();
-
     @ManyToMany(mappedBy = "parentRoles")
     @JsonIgnore
     private Set<Role> childRoles = new HashSet<>();
+
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private Set<ApplicationUser> users = new HashSet<>();
+
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private Set<UserGroup> userGroups = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -208,6 +202,31 @@ public class Role implements Serializable {
         this.parentRoles = roles;
     }
 
+    public Set<Role> getChildRoles() {
+        return childRoles;
+    }
+
+    public Role childRoles(Set<Role> roles) {
+        this.childRoles = roles;
+        return this;
+    }
+
+    public Role addChildRole(Role role) {
+        this.childRoles.add(role);
+        role.getParentRoles().add(this);
+        return this;
+    }
+
+    public Role removeChildRole(Role role) {
+        this.childRoles.remove(role);
+        role.getParentRoles().remove(this);
+        return this;
+    }
+
+    public void setChildRoles(Set<Role> roles) {
+        this.childRoles = roles;
+    }
+
     public Set<ApplicationUser> getUsers() {
         return users;
     }
@@ -256,31 +275,6 @@ public class Role implements Serializable {
 
     public void setUserGroups(Set<UserGroup> userGroups) {
         this.userGroups = userGroups;
-    }
-
-    public Set<Role> getChildRoles() {
-        return childRoles;
-    }
-
-    public Role childRoles(Set<Role> roles) {
-        this.childRoles = roles;
-        return this;
-    }
-
-    public Role addChildRole(Role role) {
-        this.childRoles.add(role);
-        role.getParentRoles().add(this);
-        return this;
-    }
-
-    public Role removeChildRole(Role role) {
-        this.childRoles.remove(role);
-        role.getParentRoles().remove(this);
-        return this;
-    }
-
-    public void setChildRoles(Set<Role> roles) {
-        this.childRoles = roles;
     }
 
     @Override
