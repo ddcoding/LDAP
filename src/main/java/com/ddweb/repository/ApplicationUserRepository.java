@@ -14,10 +14,10 @@ import java.util.List;
 @Repository
 public interface ApplicationUserRepository extends JpaRepository<ApplicationUser,Long> {
 
-    @Query("select distinct application_user from ApplicationUser application_user left join fetch application_user.roles left join fetch application_user.userGroups")
+    @Query("select distinct application_user from ApplicationUser application_user left join fetch application_user.roles")
     List<ApplicationUser> findAllWithEagerRelationships();
 
-    @Query("select application_user from ApplicationUser application_user left join fetch application_user.roles left join fetch application_user.userGroups where application_user.id =:id")
+    @Query("select application_user from ApplicationUser application_user left join fetch application_user.roles where application_user.id =:id")
     ApplicationUser findOneWithEagerRelationships(@Param("id") Long id);
 
 }

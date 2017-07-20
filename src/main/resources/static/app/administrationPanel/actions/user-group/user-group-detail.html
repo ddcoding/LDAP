@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>User Group</span> {{vm.userGroup.id}}</h2>
+    <h2 style="background-color: #ccc"><span>User Group</span> {{vm.userGroup.id}}</h2>
     <hr>
     <dl class="dl-horizontal jh-entity-details">
         <dt><span>Name</span></dt>
@@ -15,6 +15,12 @@
         <dd>
             <span ng-repeat="roles in vm.userGroup.roles">
                 <a ui-sref="role-detail({id: roles.id})">{{roles.name}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            <span ng-repeat="user in vm.userGroup.users">
+                <a ui-sref="application-user-detail({id: user.id})">{{user.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
     </dl>

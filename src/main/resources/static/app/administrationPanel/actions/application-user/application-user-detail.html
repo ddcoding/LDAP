@@ -1,6 +1,6 @@
 
 <div>
-    <h2><span>Application User</span> {{vm.applicationUser.id}}</h2>
+    <h2 style="background-color: #ccc"><span>Application User</span> {{vm.applicationUser.id}}</h2>
     <hr>
     <dl class="dl-horizontal jh-entity-details">
         <dt><span>Branch</span></dt>
@@ -31,12 +31,6 @@
         <dd>
             <span ng-repeat="roles in vm.applicationUser.roles">
                 <a ui-sref="role-detail({id: roles.id})">{{roles.name}}</a>{{$last ? '' : ', '}}
-            </span>
-        </dd>
-        <dt><span>User Groups</span></dt>
-        <dd>
-            <span ng-repeat="userGroups in vm.applicationUser.userGroups">
-                <a ui-sref="user-group-detail({id: userGroups.id})">{{userGroups.name}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
     </dl>

@@ -14,10 +14,10 @@ import java.util.List;
 @Repository
 public interface UserGroupRepository extends JpaRepository<UserGroup,Long> {
 
-    @Query("select distinct user_group from UserGroup user_group left join fetch user_group.roles")
+    @Query("select distinct user_group from UserGroup user_group left join fetch user_group.roles left join fetch user_group.users")
     List<UserGroup> findAllWithEagerRelationships();
 
-    @Query("select user_group from UserGroup user_group left join fetch user_group.roles where user_group.id =:id")
+    @Query("select user_group from UserGroup user_group left join fetch user_group.roles left join fetch user_group.users where user_group.id =:id")
     UserGroup findOneWithEagerRelationships(@Param("id") Long id);
 
 }

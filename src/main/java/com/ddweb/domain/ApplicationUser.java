@@ -1,5 +1,6 @@
 package com.ddweb.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
@@ -54,10 +55,8 @@ public class ApplicationUser implements Serializable {
             inverseJoinColumns = @JoinColumn(name="roles_id", referencedColumnName="id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany
-    @JoinTable(name = "application_user_user_groups",
-            joinColumns = @JoinColumn(name="application_users_id", referencedColumnName="id"),
-            inverseJoinColumns = @JoinColumn(name="user_groups_id", referencedColumnName="id"))
+    @ManyToMany(mappedBy = "users")
+    @JsonIgnore
     private Set<UserGroup> userGroups = new HashSet<>();
 
     public Long getId() {
